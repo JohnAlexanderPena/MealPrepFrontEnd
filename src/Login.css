@@ -63,7 +63,7 @@ a,
   position: relative;
   z-index: 4;
   top: 50px;
-  left: 200px;
+  left: 1000px;
   height: 50%;
 }
 .thumbnail__logo {
@@ -95,6 +95,8 @@ h2 {
 .heading--secondary {font-size: 2.414rem;}
 .thumbnail__links {
   align-self: flex-end;
+  position: absolute;
+  left: 50px;
   width: 50%;
   padding: .05rem 2rem;
 
@@ -106,9 +108,20 @@ h2 {
   &:hover {color: rgba(255,255,255,.5);}
 }
 .signup__form {
-  padding: 2.5rem;
+  /* padding: 2.5rem; */
   background: #fafafa;
+  align-self: flex-end;
+  padding: .5rem 30rem;
+  position: absolute;
+  left: 50px;
+  width: 50%;
+  height: 100%;
+  vertical-align: bottom;
+
+  /* padding: 5rem 2rem; */
+
 }
+
 label {
   font-size: .85rem;
   text-transform: uppercase;
