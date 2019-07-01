@@ -1,4 +1,9 @@
 import React from 'react';
+import { Button } from 'semantic-ui-react'
+import { Route, Switch, Redirect } from 'react-router-dom'
+import Login from './Login'
+
+
 
 import '../App.css';
 
@@ -6,6 +11,8 @@ class Splash extends React.Component{
 
   render() {
     return (
+
+
       <div class="signup__container">
   <div class="container__child signup__thumbnail">
     <div class="thumbnail__logo">
@@ -23,7 +30,8 @@ class Splash extends React.Component{
     </div>
     <div class="signup__overlay"></div>
   </div>
-</div>
+  </div>
+
     );
   }
 

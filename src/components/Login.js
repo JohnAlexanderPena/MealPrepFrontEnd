@@ -1,62 +1,81 @@
-import React from 'react';
-import '../Login.css'
+import React from 'react'
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-router-dom"
+import { NavLink } from 'react-router-dom'
 
-class Login extends React.Component{
+
+class LoginForm extends React.Component{
+
 
   state = {
-    name: '',
-    username: '',
-    password: '',
-    weight: null,
-    bmi: null,
+    username: "",
+    password: "",
   }
 
-  handleChange = (event) => {
-      this.setState({
-        [event.target.name]: event.target.value
-      })
+
+handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
   }
 
-  handleSignUpForm = () => {
-    
-  }
+  handleSubmit = () => {
+    if(this.state.username <=0 | this.state.password.length <= 0){
+      alert("Please Enter Information")
+    }else{
+  		fetch("http://localhost:3000/login", {
+  			method: "POST",
+  			headers: {
+  				"Content-Type": "application/json",
+  				"Accepts": "application/json"
+  			},
+  			body: JSON.stringify(this.state)
+  		})
+  		.then(res => res.json())
+  		.then(data => {
+  			if (data === null ){
+  				alert('Wrong Username and/or Password!')
+  			} else {
+  				this.props.setCurrentUser(data)
+  			}
+  		})
+      }
+  	}
 
 
 render() {
-  console.log(this.state)
-    return (
-    <div class="container__child signup__form">
-      <form action="POST">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input onChange={this.handleChange} class="form-control" type="text" name="username" id="username" placeholder="Lifting Larry" required />
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input onChange={this.handleChange} class="form-control" type="text" name="email" id="email" placeholder="james.bond@MyMeals.com" required />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input onChange={this.handleChange} class="form-control" type="password" name="password" id="password" placeholder="********" required />
-        </div>
-        <div class="form-group">
-          <label for="passwordRepeat">Repeat Password</label>
-          <input onChange={this.handleChange} class="form-control" type="password" name="passwordRepeat" id="passwordRepeat" placeholder="********" required />
-        </div>
-        <div class="m-t-lg">
-          <ul class="list-inline">
-            <li>
-              <input class="btn btn--form" type="submit" value="Register" />
-            </li>
-            <li>
-              <a class="signup__link" href="#">I am already a member</a>
-            </li>
-          </ul>
-        </div>
-      </form>
-    </div>
+  return (
+  <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+    <Grid.Column style={{ maxWidth: 450 }}>
+      <Header as='h2' color='black' textAlign='center'>
+        <Image src="https://i.imgur.com/BtZWQ9i.png" /> Log-in to your account
+      </Header>
+      <Form onSubmit={this.handleSubmit} size='large'>
+        <Segment stacked>
+          <Form.Input onChange= {this.handleChange} name="username" fluid icon='user' iconPosition='left' placeholder='Username' />
+          <Form.Input
+          onChange={this.handleChange}
+            fluid
+            icon='lock'
+            iconPosition='left'
+            placeholder='Password'
+            type='password'
+            name="password"
+          />
+          <Button type="submit" color='black' fluid size='large'>
+            Login
+          </Button>
+        </Segment>
+      </Form>
+      <Message>
+        <NavLink to="/signup">
+          <Button color='black'>New to us? Sign Up</Button>
+        </NavLink>
+      </Message>
+    </Grid.Column>
+  </Grid>
     )
   }
 }
 
-export default Login;
+export default LoginForm
