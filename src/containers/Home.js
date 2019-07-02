@@ -4,6 +4,10 @@ import Navbar from '../../src/components/Navbar'
 import PackagePage from '../../src/components/PackagePage'
 import MealContainer from './MealContainer'
 import Journal from './Journal'
+import BMIPage from '../../src/components/BMIPage'
+import Profile from '../../src/components/Profile'
+
+
 
 class Home extends Component {
 
@@ -38,20 +42,20 @@ componentDidMount(){
       })
     })
   )
-.then(this.props.getPackages(this.state.packages))
 }
+
 
 
   render() {
     console.log(this.state.packages)
     return (
       <Router>
-          <Navbar handleLoggedIn={this.props.handleLoggedIn}/>
-          <h3>HELLLLLOOOOO</h3>
+        <Navbar handleLoggedIn={this.props.handleLoggedIn}/>
+            <Route path="/profile" render={() => <Profile currentUser={this.props.currentUser} packages={this.state.packages}/>}/>
             <Route path="/packages" render={() => <PackagePage currentUser={this.props.currentUser} packages={this.state.packages}/>}/>
             <Route path="/meals" render={() => <MealContainer currentUser={this.props.currentUser} meals={this.state.meals} />}/>
             <Route path="/journal" render={() => <Journal currentUser={this.props.currentUser} journals={this.state.journals}/>}/>
-      </Router>
+    </Router>
     );
   }
 }

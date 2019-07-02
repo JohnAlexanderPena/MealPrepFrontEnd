@@ -1,35 +1,39 @@
 import React from 'react'
 import { Link, Redirect, NavLink } from 'react-router-dom'
 
-const getBmi = (props) => {
+class getBmi extends React.Component{
 
-let result = (703 * props.currentUser.weight/(props.currentUser.height ** 2))
+state = {
+  bmi: 0
+}
 
-let bmiResults = (props) => {
-  if(result < 18.5){
-    return "Your BMI shows you are below the recommended weight"
-  }else if(result > 18.5 && result <24.9){
-    return "Your BMI shows you are at a healthy weight"
-  }else if(result > 25 && result < 29.9){
-    return "Your BMI shows you are above the recommended weight"
-  }else if(result > 30 && result < 40){
-    return "Your BMI shows your are O"
-  }else if(result > 40){
-    return "Your BMI shows your are o+"
-  }else{
-    return "Wrong Input"
+
+
+ bmiResults = () => {
+  if(this.result < 18.5){
+      return "Your BMI shows you are below the recommended weight"
+    }else if(this.result > 18.5 && this.result <24.9){
+      return "Your BMI shows you are at a healthy weight"
+    }else if(this.result > 25 && this.result < 29.9){
+      return "Your BMI shows you are above the recommended weight"
+    }else if(this.result > 30 && this.result < 40){
+      return "Your BMI shows your are O"
+    }else if(this.result > 40){
+      return "Your BMI shows your are o+"
+    }else{
+      return "Wrong Input"
+    }
   }
-  }
 
-console.log(props.packages)
-
+render(){
 return(
   <div>
-    <h6>{bmiResults()}</h6>
+    <h4>{this.bmiResults()}</h4>
     <h2>{}</h2>
     <NavLink to="/">Home</NavLink>
   </div>
   )
+}
 }
 
 export default getBmi

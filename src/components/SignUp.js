@@ -1,6 +1,6 @@
 import React from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import { Link, Redirect, NavLink } from 'react-router-dom'
+import { Button, Form, Grid, Header, Image } from 'semantic-ui-react'
+import {  NavLink } from 'react-router-dom'
 
 
 class SignUp extends React.Component{
@@ -42,7 +42,7 @@ handleChange = (event) => {
           this.props.setCurrentUser(response)
 				}
 			})
-      .then(this.props.history.push("/bmi"))
+      .then(this.props.history.push("/pofile"))
 		}
 	}
 

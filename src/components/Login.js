@@ -33,7 +33,7 @@ handleChange = (event) => {
   		})
   		.then(res => res.json())
   		.then(data => {
-  			if (data === null ){
+  			if (data === null || data.errors){
   				alert('Wrong Username and/or Password!')
   			} else {
   				this.props.setCurrentUser(data)

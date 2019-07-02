@@ -4,6 +4,7 @@ import Login from '../../src/components/Login'
 import SignUp from '../../src/components/SignUp'
 import Home from './Home'
 import BMIPage from '../../src/components/BMIPage'
+import Profile from '../../src/components/Profile'
 
 
 class MainContainer extends Component {
@@ -23,7 +24,8 @@ handleSignUpClick = () => {
 
 getPackages = (obj) => {
   this.setState({
-    packages: obj
+    packages: obj,
+    loggedIn: !this.state.loggedIn
   })
 }
 
@@ -50,16 +52,16 @@ setCurrentUser = (data) => {
   }
 
   render() {
-    console.log(this.state.packages)
     return (
       <Router>
         <Switch>
-            <Route path="/signup" render={(routerProps) => <SignUp packages={this.state.packages} setCurrentUser={this.setCurrentUser} handleLoggedIn={this.handleLoggedIn} {...routerProps}/>}/>
+            <Route path="/profile" render={() => <Profile currentUser={this.props.currentUser} packages={this.state.packages}/>}/>
+            <Route path="/signup" render={(routerProps) => <SignUp getPackages={this.getPackages} packages={this.state.packages} setCurrentUser={this.setCurrentUser} handleLoggedIn={this.handleLoggedIn} {...routerProps}/>}/>
             <Route path="/bmi" render={() => <BMIPage  packages={this.state.packages} currentUser={this.state.currentUser}/>} />
-            <Route path="/" render={() => (this.state.loggedIn === true) ?
-                  <Home getPackages={this.getPackages}loggedIn={this.state.loggedIn}currentUser={this.state.currentUser}handleLoggedIn={this.handleLoggedIn}/>
+            <Route path="/" render={(routerProps) => (this.state.loggedIn === true) ?
+                  <Home getPackages={this.getPackages}loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}handleLoggedIn={this.handleLoggedIn}/>
                                 :
-                  <Login setCurrentUser ={this.setCurrentUser} handleSignUpClick={this.handleSignUpClick} loggedIn={this.state.loggedIn} handleLoggedIn={this.handleLoggedIn}/> }/>
+                  <Login {...routerProps} setCurrentUser ={this.setCurrentUser} handleSignUpClick={this.handleSignUpClick} loggedIn={this.state.loggedIn} handleLoggedIn={this.handleLoggedIn}/> }/>
         </Switch>
       </Router>
     );
@@ -69,27 +71,4 @@ setCurrentUser = (data) => {
 
 export default MainContainer;
 
-// <Route render={() => <h3>404 NOT FOUND</h3>} />
-//
-//
-//
-// <Route exact path="/" render={() => {
-//     return (
-//       <Login setCurrentUser ={this.setCurrentUser}
-//              handleSignUpClick={this.handleSignUpClick}
-//              loggedIn={this.state.loggedIn}
-//              handleLoggedIn={this.handleLoggedIn}
-//              />)
-//            }
-//           }/>
-
-
-
-
-// {
-//   (this.state.signUpClicked === false) ?
-//
-//   <Login setCurrentUser={this.setCurrentUser} handleSignUpClick={this.handleSignUpClick}/>
-//   :
-//   <SignUp setCurrentUser={this.setCurrentUser}/>
-// }
+//<Route render={() => <h3>404 NOT FOUND</h3>} />

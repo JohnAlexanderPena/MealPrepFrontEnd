@@ -21,7 +21,14 @@ import Journal from './../containers/Journal'
           as={NavLink} to="/">
           <img src='https://i.imgur.com/BtZWQ9i.png' alt="logo"/>
         </Menu.Item>
-
+        <Menu.Item
+          as={NavLink} to="/profile"
+          name='profile'
+          active={activeItem === 'profile'}
+          onClick={this.handleItemClick}
+        >
+        Profile
+        </Menu.Item>
         <Menu.Item
           as={NavLink} to="/journal"
           name='journal'
