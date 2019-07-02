@@ -13,14 +13,6 @@ state = {
   packages: [],
 }
 
-getPackages = () => {
-
-}
-
-getMeals = () => {
-
-}
-
 componentDidMount(){
   fetch('http://localhost:3000/packages')
   .then(resp => resp.json())
@@ -46,18 +38,19 @@ componentDidMount(){
       })
     })
   )
+.then(this.props.getPackages(this.state.packages))
 }
 
 
-
   render() {
+    console.log(this.state.packages)
     return (
       <Router>
           <Navbar handleLoggedIn={this.props.handleLoggedIn}/>
           <h3>HELLLLLOOOOO</h3>
-          <Route path="/packages" render={() => <PackagePage currentUser={this.props.currentUser} packages={this.state.packages}/>}  />
-          <Route path="/meals" render={() => <MealContainer currentUser={this.props.currentUser} meals={this.state.meals} />}/>
-          <Route path="/journal" render={() => <Journal currentUser={this.props.currentUser} journals={this.state.journals}/>} />
+            <Route path="/packages" render={() => <PackagePage currentUser={this.props.currentUser} packages={this.state.packages}/>}/>
+            <Route path="/meals" render={() => <MealContainer currentUser={this.props.currentUser} meals={this.state.meals} />}/>
+            <Route path="/journal" render={() => <Journal currentUser={this.props.currentUser} journals={this.state.journals}/>}/>
       </Router>
     );
   }

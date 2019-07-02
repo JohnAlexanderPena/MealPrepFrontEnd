@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 
 class MealContainer extends Component {
 
-  // state = {
-  //   meals: []
-  // }
-  //
-
-
   render() {
     return (
       <div>

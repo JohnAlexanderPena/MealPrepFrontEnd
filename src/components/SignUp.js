@@ -36,12 +36,13 @@ handleChange = (event) => {
 			})
 			.then(res => res.json())
 			.then(response => {
-				if (response === null){
+				if (response.errors){
           alert("You Dun Goofed")
 				} else {
-					this.props.setCurrentUser(response)
+          this.props.setCurrentUser(response)
 				}
 			})
+      .then(this.props.history.push("/bmi"))
 		}
 	}
 
@@ -78,7 +79,7 @@ render(){
             <Button type="submit">
               Submit
             </Button>
-            <Button as={ NavLink } to="/" type="submit">Login</Button>
+            <Button as={ NavLink } to="/" type="submit">Back to Login</Button>
         </Form>
   </Grid.Column>
   </Grid>
