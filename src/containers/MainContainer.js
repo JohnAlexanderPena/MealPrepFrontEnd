@@ -46,29 +46,16 @@ handleSignUpClick = () => {
   }
 
   render() {
-    console.log(this.state)
+    console.log(this.state.currentUser)
     return (
       <Router>
         <Switch>
-            <Route path="/signup" render={() =>
-                <SignUp
-                  setCurrentUser={this.setCurrentUser}
-                  handleLoggedIn={this.handleLoggedIn}/>
-              }/>
-            <Route path="/bmi" render={() =>
-                <BMIPage currentUser={this.state.currentUser}/>} />
-            <Route path="/" render={() =>
-                  (this.state.loggedIn === true) ?
-                  <Home loggedIn={this.state.loggedIn}
-                    currentUser={this.state.currentUser}
-                    handleLoggedIn={this.handleLoggedIn}
-                    />
+            <Route path="/signup" render={() => <SignUp setCurrentUser={this.setCurrentUser} handleLoggedIn={this.handleLoggedIn}/>}/>
+            <Route path="/bmi" render={() => <BMIPage currentUser={this.state.currentUser}/>} />
+            <Route path="/" render={() => (this.state.loggedIn === true) ?
+                  <Home loggedIn={this.state.loggedIn}currentUser={this.state.currentUser}handleLoggedIn={this.handleLoggedIn}/>
                                 :
-                  <Login setCurrentUser ={this.setCurrentUser}
-                         handleSignUpClick={this.handleSignUpClick}
-                         loggedIn={this.state.loggedIn}
-                         handleLoggedIn={this.handleLoggedIn}/>
-                     }/>
+                  <Login setCurrentUser ={this.setCurrentUser} handleSignUpClick={this.handleSignUpClick} loggedIn={this.state.loggedIn} handleLoggedIn={this.handleLoggedIn}/> }/>
             <Route render={() => <h3>404 NOT FOUND</h3>} />
         </Switch>
       </Router>

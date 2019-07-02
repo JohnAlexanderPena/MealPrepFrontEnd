@@ -54,6 +54,7 @@ componentDidMount(){
     return (
       <Router>
           <Navbar handleLoggedIn={this.props.handleLoggedIn}/>
+          <h3>HELLLLLOOOOO</h3>
           <Route path="/packages" render={() => <PackagePage currentUser={this.props.currentUser} packages={this.state.packages}/>}  />
           <Route path="/meals" render={() => <MealContainer currentUser={this.props.currentUser} meals={this.state.meals} />}/>
           <Route path="/journal" render={() => <Journal currentUser={this.props.currentUser} journals={this.state.journals}/>} />

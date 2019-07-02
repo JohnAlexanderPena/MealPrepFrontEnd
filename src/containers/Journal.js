@@ -8,6 +8,7 @@ class Journal extends Component {
 
     return (
       <div>
+        <h3>Here are all your journal entries, {this.props.currentUser.name}!</h3>
       {filteredJournals.map(journal => {
         return <h3>{journal.content}</h3>
         })}

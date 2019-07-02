@@ -13,7 +13,7 @@ class MealContainer extends Component {
       <div>
         <ul>
           {this.props.meals.map(meal => {
-            return <li> {meal.name}</li>
+            return <li>{meal.name}</li>
           })}
         </ul>
       </div>

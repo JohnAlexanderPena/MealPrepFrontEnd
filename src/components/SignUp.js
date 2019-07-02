@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect, NavLink } from 'react-router-dom'
 
 
 class SignUp extends React.Component{
@@ -37,7 +37,7 @@ handleChange = (event) => {
 			.then(res => res.json())
 			.then(response => {
 				if (response === null){
-          alert("Check Input Fields")
+          alert("You Dun Goofed")
 				} else {
 					this.props.setCurrentUser(response)
 				}
@@ -75,7 +75,10 @@ render(){
             <Form.Input onChange={this.handleChange}  type="number" name='height' placeholder='Height(inches)' />
           </Form.Group>
           <Form.Checkbox label='I agree that this is not an official dietary regimen.' />
-            <Button astype='submit'>Submit</Button>
+            <Button type="submit">
+              Submit
+            </Button>
+            <Button as={ NavLink } to="/" type="submit">Login</Button>
         </Form>
   </Grid.Column>
   </Grid>
