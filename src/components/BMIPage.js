@@ -1,6 +1,8 @@
 import React from 'react'
 import { Redirect, NavLink } from 'react-router-dom'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import {  List } from 'semantic-ui-react'
+
 
 
 class getBmi extends React.Component{
@@ -27,7 +29,7 @@ componentDidMount() {
   let result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
 
   if(result < 18.5){
-      return `Your BMI of ${result} shows you are below the recommended weight`
+      return `Your BMI of ${result} shows you are below the recommended weight and we reommend the Heavy Package`
     }else if(result > 18.5 && result <24.9){
       return `Your BMI of ${result} shows you are at a healthy weight`
     }else if(result > 25 && result < 29.9){

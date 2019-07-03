@@ -70,5 +70,3 @@ setCurrentUser = (data) => {
 }
 
 export default MainContainer;
-
-//<Route render={() => <h3>404 NOT FOUND</h3>} />
