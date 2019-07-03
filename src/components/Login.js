@@ -33,10 +33,10 @@ handleChange = (event) => {
   		})
   		.then(res => res.json())
   		.then(data => {
-  			if (data === null || data.errors){
+  			if (data.errors){
   				alert('Wrong Username and/or Password!')
   			} else {
-          
+          console.log(data)
   				this.props.setCurrentUser(data)
   			}
   		})
@@ -64,7 +64,7 @@ render() {
             name="password"
           />
           <Button type="submit" color='black' fluid size='large'>
-            Login
+              Login
           </Button>
         </Segment>
       </Form>

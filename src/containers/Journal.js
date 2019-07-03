@@ -9,9 +9,11 @@ class Journal extends Component {
     return (
       <div>
         <h3>Here are all your journal entries, {this.props.currentUser.name}!</h3>
+      <ul>
       {filteredJournals.map(journal => {
-        return <h3>{journal.content}</h3>
+        return <div><li>{journal.content}</li><br/></div>
         })}
+      </ul>
       </div>
     );
   }
