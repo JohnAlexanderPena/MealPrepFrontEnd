@@ -1,36 +1,51 @@
 import React from 'react'
-import { Link, Redirect, NavLink } from 'react-router-dom'
+import { Redirect, NavLink } from 'react-router-dom'
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+
 
 class getBmi extends React.Component{
 
 state = {
-  bmi: 0
+  packages: [],
+}
+
+componentDidMount() {
+  fetch('http://localhost:3000/packages')
+  .then(resp => resp.json())
+  .then(response => {
+    this.setState({
+      packages: response
+    })
+  })
 }
 
 
 
+
  bmiResults = () => {
-  if(this.result < 18.5){
-      return "Your BMI shows you are below the recommended weight"
-    }else if(this.result > 18.5 && this.result <24.9){
-      return "Your BMI shows you are at a healthy weight"
-    }else if(this.result > 25 && this.result < 29.9){
-      return "Your BMI shows you are above the recommended weight"
-    }else if(this.result > 30 && this.result < 40){
-      return "Your BMI shows your are O"
-    }else if(this.result > 40){
-      return "Your BMI shows your are o+"
+
+  let result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
+
+  if(result < 18.5){
+      return `Your BMI of ${result} shows you are below the recommended weight`
+    }else if(result > 18.5 && result <24.9){
+      return `Your BMI of ${result} shows you are at a healthy weight`
+    }else if(result > 25 && result < 29.9){
+      return `Your BMI of ${result} shows you are above the recommended weight`
+    }else if(result > 30 && result < 40){
+      return `Your BMI of ${result} shows your are overweight`
+    }else if(result > 40){
+      return `Your BMI of ${result} shows your are severely overweight`
     }else{
-      return "Wrong Input"
+      return `${result}!!`
     }
   }
 
 render(){
 return(
   <div>
-    <h4>{this.bmiResults()}</h4>
-    <h2>{}</h2>
-    <NavLink to="/">Home</NavLink>
+    <h4>{this.bmiResults()}!!</h4>
+    <Button as={NavLink} to="/">Home</Button>
   </div>
   )
 }

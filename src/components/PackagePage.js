@@ -9,9 +9,11 @@ const filteredUserPackages = this.props.packages.filter(pack => pack.id === this
 
   return (
     <div>
+      <ul>
       {filteredUserPackages.map(pck => {
-        return <li> {pck.name}</li>
+        return <div><li>{pck.name}</li><button> Add To Package </button></div>
         })}
+      </ul>
     </div>
     )
   }

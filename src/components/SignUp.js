@@ -23,7 +23,7 @@ handleChange = (event) => {
 	}
 
   createUser = () => {
-		if (this.state.password === !this.state.passwordConfirmation){
+		if (this.state.password === !this.state.passwordConfirmation ){
       alert("Make Sure Passwords Match!")
     }else{
 			fetch("http://localhost:3000/users", {
@@ -40,9 +40,9 @@ handleChange = (event) => {
           alert("You Dun Goofed")
 				} else {
           this.props.setCurrentUser(response)
+          this.props.history.push("/bmi")
 				}
 			})
-      .then(this.props.history.push("/pofile"))
 		}
 	}
 
@@ -71,7 +71,7 @@ render(){
             <Form.Input onChange={this.handleChange} type="password" name='passwordConfirmation' placeholder='Password Confirmation' />
           </Form.Group>
           <Form.Group widths={1}>
-            <Form.Input onChange={this.handleChange}  type="number" name='weight' placeholder='Weight(pounds)' />
+            <Form.Input onChange={this.handleChange}  type="password" name='weight' placeholder='Weight(pounds)' />
             <Form.Input onChange={this.handleChange}  type="number" name='age' placeholder='Age' />
             <Form.Input onChange={this.handleChange}  type="number" name='height' placeholder='Height(inches)' />
           </Form.Group>

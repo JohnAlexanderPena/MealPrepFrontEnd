@@ -4,7 +4,8 @@ class Profile extends Component {
 
   render() {
     return (
-      <div><h3>Welcome !</h3></div>
+      <div><h3>Welcome {this.props.currentUser.name}!</h3></div>
+
     );
   }
 

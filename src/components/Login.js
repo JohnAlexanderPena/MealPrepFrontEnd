@@ -36,6 +36,7 @@ handleChange = (event) => {
   			if (data === null || data.errors){
   				alert('Wrong Username and/or Password!')
   			} else {
+          
   				this.props.setCurrentUser(data)
   			}
   		})
