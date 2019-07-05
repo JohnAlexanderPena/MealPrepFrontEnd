@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-router-dom"
+// import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-router-dom"
 import { NavLink } from 'react-router-dom'
 
 
@@ -36,7 +36,6 @@ handleChange = (event) => {
   			if (data.errors){
   				alert('Wrong Username and/or Password!')
   			} else {
-          console.log(data)
   				this.props.setCurrentUser(data)
   			}
   		})
@@ -49,7 +48,7 @@ render() {
   <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
       <Header as='h2' color='black' textAlign='center'>
-        <Image src="https://i.imgur.com/BtZWQ9i.png" /> Log-in to your account
+        <Image src="https://i.imgur.com/BtZWQ9i.png"/> Log-in to your account
       </Header>
       <Form onSubmit={this.handleSubmit} size='large'>
         <Segment stacked>

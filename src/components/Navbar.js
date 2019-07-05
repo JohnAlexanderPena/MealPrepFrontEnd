@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
-import { Link, NavLink } from 'react-router-dom'
-import Journal from './../containers/Journal'
+import {  NavLink } from 'react-router-dom'
+// import Journal from './../containers/Journal'
 
 
  class Navbar extends Component {
@@ -47,7 +47,7 @@ import Journal from './../containers/Journal'
           Packages
         </Menu.Item>
 
-        <Menu.Item
+        <Menu.Item floated="right"
           onClick={this.props.handleLoggedIn}
           as={NavLink} to="/" name='login'
           active={activeItem === 'sign-in'}

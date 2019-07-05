@@ -1,7 +1,6 @@
 import React from 'react'
-import { Redirect, NavLink } from 'react-router-dom'
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import {  List } from 'semantic-ui-react'
+import {  NavLink } from 'react-router-dom'
+import { Button } from 'semantic-ui-react'
 
 
 
@@ -46,6 +45,7 @@ componentDidMount() {
 render(){
 return(
   <div>
+    <h3>Results are not always guaranteed to be representative of actual recommended weight.</h3>
     <h4>{this.bmiResults()}!!</h4>
     <Button as={NavLink} to="/">Home</Button>
   </div>
@@ -54,15 +54,3 @@ return(
 }
 
 export default getBmi
-
-
-
-// BMI below 18.5: Underweight
-//
-// BMI 18.5 to 24.9: Healthy weight or "ideal body weight"
-//
-// BMI 25 to 29.9: Overweight
-//
-// BMI 30 and over: Obese
-//
-// BMI 40 and over: Severe obesity
