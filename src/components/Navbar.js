@@ -47,7 +47,7 @@ import {  NavLink } from 'react-router-dom'
           Packages
         </Menu.Item>
 
-        <Menu.Item floated="right"
+        <Menu.Item position="right"
           onClick={this.props.handleLoggedIn}
           as={NavLink} to="/" name='login'
           active={activeItem === 'sign-in'}

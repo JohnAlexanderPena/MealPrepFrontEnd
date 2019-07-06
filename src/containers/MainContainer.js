@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Login from '../../src/components/Login'
 import SignUp from '../../src/components/SignUp'
 import Home from './Home'
@@ -12,7 +12,7 @@ class MainContainer extends Component {
 state = {
   signUpClicked: false,
   loggedIn: false,
-  currentUser: {},
+  currentUser: null,
   packages: []
 }
 
@@ -28,6 +28,30 @@ getPackages = (obj) => {
     loggedIn: !this.state.loggedIn
   })
 }
+
+
+componentDidMount(){
+    const token = localStorage.getItem("token")
+
+    if (token){
+      fetch(`http://localhost:3000/auto_login`, {
+        headers: {
+          "Authorization": token
+        }
+      })
+      .then(res => res.json())
+      .then(response => {
+        if (response.errors){
+          alert(response.errors)
+        } else {
+          this.setState({
+            currentUser: response,
+            loggedIn: !this.state.loggedIn
+          })
+        }
+      })
+    }
+  }
 
 updateUser = (user) => {
     localStorage.removeItem('token')
@@ -46,12 +70,13 @@ handleLoggedIn = () => {
 setCurrentUser = (data) => {
     localStorage.setItem("token", data.token)
     this.setState({
-      currentUser: data,
+      currentUser: data.user,
       loggedIn: !this.state.loggedIn
     })
   }
 
   render() {
+    console.log(this.state)
     return (
       <Router>
         <Switch>

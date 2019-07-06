@@ -11,7 +11,7 @@ class Profile extends Component {
       <List.Item icon='marker' content='New York, NY' />
       <List.Item
         icon='mail'
-        content={<a href='mailto:jack@semantic-ui.com'>j{this.props.currentUser.name}</a>}
+        content={<a href='mailto:jack@semantic-ui.com'>{this.props.currentUser.name}</a>}
       />
     <List.Item icon='linkify' content={<a href='http://www.USDA.gov'>USDA Info</a>} />
   </List>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Form, Image, List, Search, TextArea, Input } from 'semantic-ui-react'
+import { Button, Form, Image, List, Search, TextArea, Input, Divider, Header, Icon, Table } from 'semantic-ui-react'
 import Modal from '../../src/components/Modal'
+import NutrientInfo from '../../src/components/NutrientInfo'
 
 class Journal extends Component {
 
@@ -20,7 +21,7 @@ class Journal extends Component {
     fetch(`https://api.nal.usda.gov/ndb/search/?format=json&q=${this.state.searchTerm}&sort=n&max=25&offset=0&api_key=4dEPGqueCE4R1FHqcGYyJG5CAqez9cFnPUHMUtMX`)
     .then(resp => resp.json())
     .then(searchObj => {
-      if (searchObj.list.item === null | searchObj.list.item === undefined){
+      if (searchObj.errors){
         alert(" Item Not in Database!")
       }else{
       this.setState({
@@ -48,11 +49,6 @@ class Journal extends Component {
     this.props.journalEntry(this.state.journalObj)
   }
 
-  handleEntry = () => {
-    return <Modal />
-
-  }
-
   handleChange = (event) => {
     const searchItem = event.target.value.split(" ").join("+")
     this.setState({
@@ -64,9 +60,13 @@ class Journal extends Component {
     fetch(`https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=4dEPGqueCE4R1FHqcGYyJG5CAqez9cFnPUHMUtMX&nutrients=205&nutrients=204&nutrients=208&nutrients=269&ndbno=${this.state.selectedFood}`)
     .then(resp => resp.json())
     .then(foodObj => {
+      if (foodObj.errors){
+        alert(" Item Not in Database!")
+      }else{
       this.setState({
         singleFood: foodObj.report.foods[0].nutrients
-      })
+        })
+      }
     })
   }
   getCurrentDate(separator=''){
@@ -82,11 +82,9 @@ class Journal extends Component {
 
 render() {
 const filteredJournals = this.props.journals.filter(entry => entry.user_id === this.props.currentUser.id)
-// const filteredEntries = this.state.newJournals.filter(entry => entry.user_id === this.props.currentUser.id)
-console.log(this.state)
 
     return (
-      <List divided verticalAlign='middle'>
+      <List divided position="centered">
         <h1>Enter Cheat Food</h1>
           <Input
               onChange={this.handleChange}
@@ -98,9 +96,29 @@ console.log(this.state)
           }
         )}
       </select><Button onClick={this.getNutrients} >Check Nutrients</Button>
-    {this.state.singleFood.map( nutrient => {
-      return <li>{nutrient.nutrient} - {nutrient.value}</li>
+      <Divider horizontal>
+        <Header as='h4'>
+          <Icon name='food' />
+          Description
+        </Header>
+      </Divider>
+      <p >
+        Check Out The Nutritional Info of Foods
+      </p>
+
+      <Divider horizontal>
+        <Header as='h4'>
+          <Icon name='bar chart' />
+          Nutritional Information
+        </Header>
+      </Divider>
+      <Table definition>
+          <Table.Body>
+    {this.state.singleFood.map(nutrient => {
+      return <NutrientInfo nutrient={nutrient}/>
     })}
+          </Table.Body>
+          </Table>
         <h3>Here are all your journal entries, {this.props.currentUser.name}!</h3>
           {filteredJournals.map(journal => {
           return  <List.Item style={{width: "1000px"}}>

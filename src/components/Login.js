@@ -44,6 +44,7 @@ handleChange = (event) => {
 
 
 render() {
+  console.log(this.state)
   return (
   <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
