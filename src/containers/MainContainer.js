@@ -32,7 +32,6 @@ getPackages = (obj) => {
 
 componentDidMount(){
     const token = localStorage.getItem("token")
-
     if (token){
       fetch(`http://localhost:3000/auto_login`, {
         headers: {
@@ -53,12 +52,6 @@ componentDidMount(){
     }
   }
 
-// updateUser = (user) => {
-//     localStorage.removeItem('token')
-//     this.setState({
-//       currentUser: null
-//     })
-//   }
 
 handleLoggedIn = () => {
     this.setState({
@@ -83,13 +76,13 @@ setCurrentUser = (data) => {
   }
 
   render() {
-    console.log(this.state)
+    console.log(this.state.currentUser, "INSIDE MAINCONTAINER")
     return (
       <Router>
         <Switch>
-            <Route path="/profile" render={() => <Profile currentUser={this.props.currentUser} packages={this.state.packages}/>}/>
+            <Route path="/profile" render={(routerProps) => <Profile centered currentUser={this.state.currentUser} packages={this.state.packages}/>}/>
             <Route path="/signup" render={(routerProps) => <SignUp getPackages={this.getPackages} packages={this.state.packages} setCurrentUser={this.setCurrentUser} handleLoggedIn={this.handleLoggedIn} {...routerProps}/>}/>
-            <Route path="/bmi" render={() => <BMIPage  packages={this.state.packages} currentUser={this.state.currentUser}/>} />
+            <Route path="/bmi" render={(routerProps) => <BMIPage packages={this.state.packages} currentUser={this.state.currentUser}/>} />
             <Route path="/" render={(routerProps) => (this.state.loggedIn === true) ?
                   <Home {...routerProps} getPackages={this.getPackages} loggedIn={this.state.loggedIn} currentUser={this.state.currentUser} signOutUser={this.signOutUser} handleLoggedIn={this.handleLoggedIn}/>
                                 :

@@ -3,10 +3,7 @@ import { Button, Form, TextArea, Input, Divider, Header, Icon, Table } from 'sem
 import NutrientInfo from '../../src/components/NutrientInfo'
 import JournalEntry from '../../src/components/JournalEntry'
 
-const colors = [
-  "blue",
-]
-
+// const colors = ["red","orange","yellow","olive","green","teal","blue","violet","purple","pink","brown","grey","black","facebook","google plus","instagram","linkedin","twitter","vk","youtube"]
 class Journal extends Component {
 
   state ={
@@ -18,12 +15,13 @@ class Journal extends Component {
     singleFood: [], //found fetched food
     journalObj: [], //text for journal entry
     newJournals: [], //newJournals to filter through
-    energy: 0,
-    protein: 0,
-    sugar: 0,
-    fat: 0,
-    carbs: 0,
-    content: ""
+    newObj: {energy: 0,
+      protein: 0,
+      sugar: 0,
+      fat: 0,
+      carbs: 0,
+      content: "",
+      }
     }
 
   findFoods = (event) => {
@@ -57,6 +55,7 @@ class Journal extends Component {
 
   submitEntry = () => {
     this.props.journalEntry(this.state.newObj)
+    // alert('Succesfully Added Entry!')
   }
 
   handleChange = (event) => {
@@ -70,7 +69,6 @@ class Journal extends Component {
     fetch(`https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=4dEPGqueCE4R1FHqcGYyJG5CAqez9cFnPUHMUtMX&nutrients=205&nutrients=203&nutrients=204&nutrients=208&nutrients=269&ndbno=${this.state.selectedFood}`)
     .then(resp => resp.json())
     .then(foodObj => {
-      debugger;
       if (foodObj.errors){
         alert("Item Not in Database!")
       }else{
@@ -83,7 +81,7 @@ class Journal extends Component {
           sugars: foodObj.report.foods[0].nutrients[2].value,
           fat: foodObj.report.foods[0].nutrients[3].value,
           carbs: foodObj.report.foods[0].nutrients[4].value,
-        }
+          }
         })
       }
     })
@@ -101,7 +99,6 @@ class Journal extends Component {
 
 
 render() {
-  console.log(this.state.singleFood)
   const filteredJournals = this.props.journals.filter(entry => entry.user_id === this.props.currentUser.id)
     return (
       <div>
@@ -109,17 +106,17 @@ render() {
           <Input
               onChange={this.handleChange}
               name="searchTerm"
-            /><Button color={colors} onClick={this.findFoods}>Search Foods</Button>
+            /><Button color='blue' onClick={this.findFoods}>Search Foods</Button>
       <select onChange={this.handleOptionChange}>
         {this.state.foods.map(food => {
           return <option value={food.ndbno}>{food.name}</option>
           }
         )}
-      </select><Button color={colors} onClick={this.getNutrients} >Check Nutrients</Button>
-      <Button color={colors} onClick={this.submitEntry }>Add To Food Journal Entry</Button>
+      </select><Button color='blue' onClick={this.getNutrients} >Check Nutrients</Button>
+    <Button color='blue' onClick={this.submitEntry }>Add To Food Journal Entry</Button>
       <Divider horizontal>
         <Header as='h4'>
-          <Icon color={colors} name='bar chart' />
+          <Icon color='blue' name='bar chart' />
           Nutritional Information
         </Header>
       </Divider>
@@ -127,9 +124,9 @@ render() {
     {this.state.singleFood.map(nutrient => {
       return <NutrientInfo key={nutrient} nutrient={nutrient}/>
     })}
-          <Divider color={colors} horizontal>
+          <Divider color='blue' horizontal>
             <Header as='h2'>
-              <Icon color={colors} name='book' />
+              <Icon color='blue' name='book' />
               Here Are Your Journal Entries {this.props.currentUser.username}!
             </Header>
           </Divider>
@@ -138,7 +135,7 @@ render() {
               <Table color='blue'>
           {
             filteredJournals.map(food =>{
-              return <Fragment>
+              return <Fragment key={food.id}>
                   <Table.Row>
                     <Table.HeaderCell>Food</Table.HeaderCell>
                     <Table.HeaderCell>Energy(Calories)</Table.HeaderCell>
@@ -148,14 +145,14 @@ render() {
                     <Table.HeaderCell>Fat</Table.HeaderCell>
                     </Table.Row>
                   <Table.Body>
-                    <Table.Cell>{food.content}</Table.Cell>
-                    <Table.Cell>{food.energy}</Table.Cell>
-                  <Table.Cell>{food.protein}</Table.Cell>
-                  <Table.Cell>{food.sugar}</Table.Cell>
+                      <Table.Cell>{food.content}</Table.Cell>
+                      <Table.Cell>{food.energy}</Table.Cell>
+                      <Table.Cell>{food.protein}</Table.Cell>
+                      <Table.Cell>{food.sugar}</Table.Cell>
                       <Table.Cell>{food.carbs}</Table.Cell>
                       <Table.Cell>{food.fat}</Table.Cell>
               </Table.Body>
-              <h4 color={colors}>Date Posted: {food.created_at.slice(0, -14)}</h4>
+              <h4 color='blue'>Date Posted: {food.created_at.slice(0, -14)}</h4>
               </Fragment>
             })
           }

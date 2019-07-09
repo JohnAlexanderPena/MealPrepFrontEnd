@@ -1,6 +1,6 @@
 import React from 'react'
 import {  NavLink } from 'react-router-dom'
-import { Button, Card, Image, Header, Icon } from 'semantic-ui-react'
+import { Button, Card, Header, Icon } from 'semantic-ui-react'
 
 
 
@@ -22,22 +22,20 @@ componentDidMount() {
 }
 
 
-
-
  bmiResults = () => {
 
   let result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
 
   if(result < 18.5){
-      return `Your BMI of ${result} shows you are below the recommended weight and we recommend the Heavy Package`
+      return `Your BMI of ${result} shows you are below the recommended weight and we recommend the Gain Package`
     }else if(result > 18.5 && result <24.9){
-      return `Your BMI of ${result} shows you are at a healthy weight`
+      return `Your BMI of ${result} shows you are at a healthy weight and we recommend the Balanced Package`
     }else if(result >= 25 && result < 29.9){
-      return `Your BMI of ${result} shows you are above the recommended weight`
+      return `Your BMI of ${result} shows you are above the recommended weight and we recommend either the Slim Package`
     }else if(result >= 30 && result < 40){
-      return `Your BMI of ${result} shows your are overweight`
+      return `Your BMI of ${result} shows your are above the recommended wieght and we recommend the Slim Package`
     }else if(result >= 40){
-      return `Your BMI of ${result} shows your are severely overweight`
+      return `Your BMI of ${result} shows your are severely overweight and we recommend the Slim Package`
     }else{
       return `Your BMI is ${result}.`
     }
@@ -48,7 +46,7 @@ return(
   <div>
     <h3>Results are not always guaranteed to be representative of actual recommended weight.</h3>
     <h4>{this.bmiResults()}!!</h4>
-      <Card.Group>
+      <Card.Group centered >
       <Card>
         <Card.Content>
           <Header as='h2'>

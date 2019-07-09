@@ -18,7 +18,7 @@ import {  NavLink } from 'react-router-dom'
 
       <Menu stackable>
         <Menu.Item
-          as={NavLink} to="/home">
+          as={NavLink} to="/profile">
           <img src='https://i.imgur.com/BtZWQ9i.png' alt="logo"/>
         </Menu.Item>
         <Menu.Item

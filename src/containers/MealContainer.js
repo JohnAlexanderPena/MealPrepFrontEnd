@@ -1,15 +1,34 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {  Button, Search, Card, Item, Label, Image, Icon } from 'semantic-ui-react'
 
 
 class MealContainer extends Component {
 
-  render() {
-    return (
-      <Item.Group divided>
+state = {
+  filteredMeals: this.props.meals
+}
 
-            {this.props.meals.map(meal => {
-              return <Item> />
+handleFilter = (event) => {
+  const veggieMeals = this.props.meals.filter(meal => meal.veggie === "Vegetarian")
+  if(event.target.value === "vegetarian"){
+    this.setState({
+      filteredMeals: veggieMeals
+    })
+  }else
+  this.setState({
+    filteredMeals: this.props.meals
+  })
+}
+
+  render() {
+
+    return (
+    <Fragment>
+      <Button value="vegetarian" onClick={this.handleFilter}>Show Vegetarian Meals Only</Button>
+      <Button value="all" onClick={this.handleFilter}>Show All</Button>
+      <Item.Group divided>
+            {this.state.filteredMeals.map((meal, index) => {
+              return <Item key={index}>
                       <Item.Image src={meal.image} />
                 <Item.Content>
                   <Item.Header as='a'>{meal.name}</Item.Header>
@@ -29,14 +48,15 @@ class MealContainer extends Component {
                   <Item.Extra>
                     <Button primary floated='right'>
                       Buy Meal
-                      <Icon name='right chevron' />
+                      <Icon name='right chevron'/>
                     </Button>
-                    <Label>Limited</Label>
+                    <Label>{meal.veggie}</Label>
                   </Item.Extra>
                 </Item.Content>
               </Item>
                    })}
         </Item.Group>
+        </Fragment>
           );
         }
 }
@@ -47,24 +67,3 @@ export default MealContainer;
 // <Search position='right'
 //   onSearchChange={this.handleChange}
 //   name="searchTerm"/>
-
-// <Item.Group divided>
-//     <Item>
-//       <Item.Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
-//
-//       <Item.Content>
-//         <Item.Header as='a'>My Neighbor Totoro</Item.Header>
-//         <Item.Meta>
-//           <span className='cinema'>IFC Cinema</span>
-//         </Item.Meta>
-//         <Item.Description>{paragraph}</Item.Description>
-//         <Item.Extra>
-//           <Button primary floated='right'>
-//             Buy tickets
-//             <Icon name='right chevron' />
-//           </Button>
-//           <Label>Limited</Label>
-//         </Item.Extra>
-//       </Item.Content>
-//     </Item>
-//   </Item.Group>

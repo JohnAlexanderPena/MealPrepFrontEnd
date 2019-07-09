@@ -48,11 +48,11 @@ componentDidMount(){
         })
       })
     )
-    .then(fetch('https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=3de475525dde45439b65bf3216d76091')
-    .then(resp => resp.json())
-    .then(allNews => {
-      console.log(allNews)
-    }))
+    // .then(fetch('https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=3de475525dde45439b65bf3216d76091')
+    // .then(resp => resp.json())
+    // .then(allNews => {
+    //   console.log(allNews)
+    // }))
   }
 }
 
@@ -64,7 +64,6 @@ getNew = () => {
 }
 
 journalEntry = (entryObj) => {
-  debugger;
   fetch('http://localhost:3000/journals', {
     method: "POST",
     headers: {
@@ -89,14 +88,33 @@ journalEntry = (entryObj) => {
         })
       })
     )
+    window.location.reload();
   }
 
+  changePlan = (event) => {
+    console.log(event)
+    fetch(`http://localhost:3000/packages/${this.props.currentUser.id}`, {
+      method: "PATCH",
+      headers: {
+    "Accept": "application/json",
+    "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id: this.props.currentUser.id,
+        name: event
+      })
+    })
+  }
+
+
+
+
   render() {
-    console.log(this.state.journals)
+    console.log(this.props.currentUser, "INSIDE HOME COMPONENT")
     return (
       <Router>
         <Navbar signOutUser={this.props.signOutUser}/>
-            <Route path="/profile" render={() => <Profile currentUser={this.props.currentUser} packages={this.state.packages}/>}/>
+            <Route path="/profile" render={() => <Profile changePlan={this.changePlan} currentUser={this.props.currentUser} packages={this.state.packages}/>}/>
             <Route path="/meals" render={() => <MealContainer currentUser={this.props.currentUser} meals={this.state.meals} />}/>
             <Route path="/journal" render={() => <Journal journalEntry={this.journalEntry} currentUser={this.props.currentUser} journals={this.state.journals}/>}/>
     </Router>
