@@ -18,7 +18,7 @@ import {  NavLink } from 'react-router-dom'
 
       <Menu stackable>
         <Menu.Item
-          as={NavLink} to="/">
+          as={NavLink} to="/home">
           <img src='https://i.imgur.com/BtZWQ9i.png' alt="logo"/>
         </Menu.Item>
         <Menu.Item
@@ -48,7 +48,7 @@ import {  NavLink } from 'react-router-dom'
         </Menu.Item>
 
         <Menu.Item position="right"
-          onClick={this.props.handleLoggedIn}
+          onClick={this.props.signOutUser}
           as={NavLink} to="/" name='login'
           active={activeItem === 'sign-in'}
           >

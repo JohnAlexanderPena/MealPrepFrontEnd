@@ -53,14 +53,21 @@ componentDidMount(){
     }
   }
 
-updateUser = (user) => {
-    localStorage.removeItem('token')
+// updateUser = (user) => {
+//     localStorage.removeItem('token')
+//     this.setState({
+//       currentUser: null
+//     })
+//   }
+
+handleLoggedIn = () => {
     this.setState({
-      currentUser: null
+      loggedIn: !this.state.loggedIn
     })
   }
 
-handleLoggedIn = () => {
+  signOutUser = () => {
+    localStorage.removeItem('token')
     this.setState({
       loggedIn: !this.state.loggedIn
     })
@@ -84,7 +91,7 @@ setCurrentUser = (data) => {
             <Route path="/signup" render={(routerProps) => <SignUp getPackages={this.getPackages} packages={this.state.packages} setCurrentUser={this.setCurrentUser} handleLoggedIn={this.handleLoggedIn} {...routerProps}/>}/>
             <Route path="/bmi" render={() => <BMIPage  packages={this.state.packages} currentUser={this.state.currentUser}/>} />
             <Route path="/" render={(routerProps) => (this.state.loggedIn === true) ?
-                  <Home {...routerProps} getPackages={this.getPackages}loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}handleLoggedIn={this.handleLoggedIn}/>
+                  <Home {...routerProps} getPackages={this.getPackages} loggedIn={this.state.loggedIn} currentUser={this.state.currentUser} signOutUser={this.signOutUser} handleLoggedIn={this.handleLoggedIn}/>
                                 :
                   <Login {...routerProps} setCurrentUser ={this.setCurrentUser} handleSignUpClick={this.handleSignUpClick} loggedIn={this.state.loggedIn} handleLoggedIn={this.handleLoggedIn}/> }/>
         </Switch>

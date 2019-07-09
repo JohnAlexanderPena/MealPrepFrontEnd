@@ -37,6 +37,7 @@ handleChange = (event) => {
   				alert('Wrong Username and/or Password!')
   			} else {
   				this.props.setCurrentUser(data)
+          this.props.history.push("/journal")
   			}
   		})
       }
@@ -44,7 +45,6 @@ handleChange = (event) => {
 
 
 render() {
-  console.log(this.state)
   return (
   <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>

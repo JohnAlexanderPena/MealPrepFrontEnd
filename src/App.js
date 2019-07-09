@@ -15,7 +15,7 @@ class App extends Component{
   render(){
     return (
       <Router>
-        <MainContainer />
+        <MainContainer style={{position: 'center'}}/>
       </Router>
     )
   }

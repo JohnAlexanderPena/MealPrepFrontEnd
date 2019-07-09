@@ -46,9 +46,13 @@ handleChange = (event) => {
 		}
 	}
 
-	handleSubmit = () => {
+	handleSubmit = (event) => {
+    event.preventDefault()
 		if(this.state.password === this.state.passwordConfirmation){
-			this.createUser()
+      this.setState({
+        [event.target.name]: event.target.value
+      })
+      this.createUser()
 		} else {
 			alert("Passwords don't match!")
 		}
