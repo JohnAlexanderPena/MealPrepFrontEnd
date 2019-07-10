@@ -13,14 +13,14 @@ state = {
 }
 
 componentDidMount() {
-  let result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
+  // let result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
 
   fetch('http://localhost:3000/packages')
   .then(resp => resp.json())
   .then(response => {
     this.setState({
       packages: response,
-      bmi: result
+      bmi: 0
     })
   })
 }
@@ -79,8 +79,10 @@ componentDidMount() {
 render(){
 return(
   <div>
-    <h3>Results are not always guaranteed to be representative of actual recommended weight.</h3>
-    <h4>{this.bmiResults()}!!</h4>
+      <Header colro='blue' as='h1'>
+          Results are not always guaranteed to be representative of actual recommended weight.
+      <Header.Subheader>{}!!</Header.Subheader>
+    </Header>
       <Card.Group centered >
       <Card>
         <Card.Content>
@@ -132,10 +134,11 @@ return(
         </Card.Content>
       </Card>
     </Card.Group>
-    <Button as={NavLink} to="/journal">Home</Button>
   </div>
   )
 }
 }
 
 export default getBmi
+
+// <Button as={NavLink} to="/journal">Home</Button>

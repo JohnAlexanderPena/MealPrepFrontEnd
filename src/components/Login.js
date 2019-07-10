@@ -37,7 +37,8 @@ handleChange = (event) => {
   				alert('Wrong Username and/or Password!')
   			} else {
   				this.props.setCurrentUser(data)
-          this.props.history.push("/journal")
+          this.props.history.push("/profile")
+          window.location.reload();
   			}
   		})
       }

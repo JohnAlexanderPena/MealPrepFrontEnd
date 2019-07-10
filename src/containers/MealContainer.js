@@ -20,8 +20,12 @@ handleFilter = (event) => {
   })
 }
 
-  render() {
+buyMeal = (event) => {
+  console.log(event.target.id)
+}
 
+  render() {
+  // debugger;
     return (
     <Fragment>
       <Button value="vegetarian" onClick={this.handleFilter}>Show Vegetarian Meals Only</Button>
@@ -46,7 +50,7 @@ handleFilter = (event) => {
                   </Item.Meta>
                   <Item.Description> Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.!</Item.Description>
                   <Item.Extra>
-                    <Button primary floated='right'>
+                    <Button id={meal.id} onClick={this.buyMeal}primary floated='right'>
                       Buy Meal
                       <Icon name='right chevron'/>
                     </Button>

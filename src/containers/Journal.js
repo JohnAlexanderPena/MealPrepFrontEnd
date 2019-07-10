@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Button, Form, TextArea, Input, Divider, Header, Icon, Table } from 'semantic-ui-react'
 import NutrientInfo from '../../src/components/NutrientInfo'
-import JournalEntry from '../../src/components/JournalEntry'
+// import JournalEntry from '../../src/components/JournalEntry'
 
 // const colors = ["red","orange","yellow","olive","green","teal","blue","violet","purple","pink","brown","grey","black","facebook","google plus","instagram","linkedin","twitter","vk","youtube"]
 class Journal extends Component {
@@ -99,7 +99,9 @@ class Journal extends Component {
 
 
 render() {
+
   const filteredJournals = this.props.journals.filter(entry => entry.user_id === this.props.currentUser.id)
+
     return (
       <div>
         <h1>Enter Cheat Food</h1>

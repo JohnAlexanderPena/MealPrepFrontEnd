@@ -9,37 +9,23 @@ import MainContainer from '../src/containers/MainContainer'
 
 class App extends Component{
 
-// state = {
-//   currentUser: []
-// }
-//
-//   componentDidMount(){
-//       const token = localStorage.getItem("token")
-//       if (token){
-//         fetch(`http://localhost:3000/auto_login`, {
-//           headers: {
-//             "Authorization": token
-//           }
-//         })
-//         .then(res => res.json())
-//         .then(response => {
-//           if (response.errors){
-//             alert(response.errors)
-//           } else {
-//             this.setState({
-//               currentUser: response,
-//             })
-//           }
-//         })
-//       }
-//     }
-
-
-
+  state = {
+    packages: []
+  }
+componentDidMount() {
+  fetch(`http://localhost:3000/packages`)
+          .then(resp => resp.json())
+          .then(resp => {
+            console.log(resp)
+            this.setState({
+              packages: resp
+            })
+      })
+}
   render(){
     return (
       <Router>
-        <MainContainer />
+        <MainContainer packages={this.state.packages}/>
       </Router>
     )
   }

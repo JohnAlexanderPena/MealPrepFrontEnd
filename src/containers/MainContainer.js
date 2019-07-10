@@ -4,7 +4,7 @@ import Login from '../../src/components/Login'
 import SignUp from '../../src/components/SignUp'
 import Home from './Home'
 import BMIPage from '../../src/components/BMIPage'
-import Profile from '../../src/components/Profile'
+// import Profile from '../../src/components/Profile'
 
 
 class MainContainer extends Component {
@@ -75,7 +75,6 @@ setCurrentUser = (data) => {
   }
 
   render() {
-    // console.log("1st Mount")
     return (
       <Router>
         <Switch>

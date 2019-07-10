@@ -12,24 +12,7 @@ class Profile extends Component {
     weight: 0,
     height: 0
   }
-
-componentDidMount(){
-  fetch(`http://localhost:3000/get_packages`, {
-        method: "GET",
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': localStorage.token
-        }
-      }).then(resp => resp.json())
-      .then(resp => {
-        console.log(resp)
-        this.setState({
-          userPackage: resp
-        })
-      })
-  }
-
+  
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -54,6 +37,7 @@ componentDidMount(){
 
 
   render() {
+    console.log(this.props.packages.length)
     return (
       <div>
   <List>
@@ -62,7 +46,7 @@ componentDidMount(){
     <List.Item icon='linkify' content={<a href='http://www.USDA.gov'>USDA Info</a>} />
   </List>
     <Header as='h2' icon textAlign='center'>
-      <Header.Content>Welcome {this.props.currentUser.name}!</Header.Content>
+      <Header.Content>Welcome {this.props.currentUser.username}!</Header.Content>
     </Header>
     <Image centered size='large' src='http://i.imgur.com/cDqspyH.png' />
       <Segment placeholder>
@@ -73,7 +57,7 @@ componentDidMount(){
             <Icon name='food' />
             Meals
           </Header>
-            <UpdateBmi currentUser={this.props.currentUser} packages={this.state.userPackage} changePlan={this.props.changePlan} color="blue"/>
+            <UpdateBmi currentUser={this.props.currentUser} packages={this.props.packages} changePlan={this.props.changePlan} color="blue"/>
         </Grid.Column>
             <Grid.Column>
           <Header icon>
