@@ -8,7 +8,7 @@ import UpdateBmi from './UpdateBmi'
 class Profile extends Component {
 
   render() {
-    const pack = this.props.packages.filter(pck => pck.id === this.props.currentUser.id)
+    const pack = this.props.packages.filter(pck => pck.user_id === this.props.currentUser.id)
     return (
       <div>
   <List>

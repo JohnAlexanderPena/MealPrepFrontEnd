@@ -9,14 +9,18 @@ class getBmi extends React.Component{
 
 state = {
   packages: [],
+  bmi: 0
 }
 
 componentDidMount() {
+  let result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
+
   fetch('http://localhost:3000/packages')
   .then(resp => resp.json())
   .then(response => {
     this.setState({
-      packages: response
+      packages: response,
+      bmi: result
     })
   })
 }
@@ -27,6 +31,7 @@ componentDidMount() {
  bmiResults = () => {
 
   let result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
+
 
   if(result < 18.5){
       return `Your BMI of ${result} shows you are below the recommended weight and we recommend the Gain Package`
@@ -44,10 +49,34 @@ componentDidMount() {
   }
 
   handleClick = (event) => {
-    console.log(event.target.name)
-  }
+    fetch("http://localhost:3000/packages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify({
+        user_id: this.props.currentUser.id,
+        name: event.target.name,
+        price: event.target.value,
+        quantiy: event.target.id
+      })
+    })
+    .then(fetch(`http://localhost:3000/users/${this.props.currentUser.id}`, {
+        method: "PATCH",
+        headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          bmi: this.state.bmi,
+        })
+    })
+  )
+  this.props.history.push("/journal")
+}
+
 render(){
-  console.log(this.props.currentUser.id)
 return(
   <div>
     <h3>Results are not always guaranteed to be representative of actual recommended weight.</h3>
@@ -65,7 +94,7 @@ return(
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-            <Button  onClick={this.handleClick} name="Heavy" basic color='blue'>
+            <Button  onClick={this.handleClick} id="8" value="60" name="Heavy" basic color='blue'>
               Choose
             </Button>
         </Card.Content>
@@ -82,7 +111,7 @@ return(
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-            <Button onClick={this.handleClick} name="Balance"basic color='blue'>
+            <Button onClick={this.handleClick} id="6" value="50" name="Balance"basic color='blue'>
               Choose
             </Button>
         </Card.Content>
@@ -97,7 +126,7 @@ return(
           <Card.Description>This package is geared towards helping you eat healthier with the perfect combination of low calories, protein, and low fats.</Card.Description>
         </Card.Content>
         <Card.Content extra>
-            <Button  onClick={this.handleClick} name="Light" basic color='blue'>
+            <Button  onClick={this.handleClick} id="4" value="38" name="Light" basic color='blue'>
               Choose
             </Button>
         </Card.Content>

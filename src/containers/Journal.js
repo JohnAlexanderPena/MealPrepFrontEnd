@@ -69,8 +69,8 @@ class Journal extends Component {
     fetch(`https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=4dEPGqueCE4R1FHqcGYyJG5CAqez9cFnPUHMUtMX&nutrients=205&nutrients=203&nutrients=204&nutrients=208&nutrients=269&ndbno=${this.state.selectedFood}`)
     .then(resp => resp.json())
     .then(foodObj => {
-      if (foodObj.errors){
-        alert("Item Not in Database!")
+      if (foodObj.errors || foodObj.report.foods[0].nutrients.length === 0){
+        alert("Item Has No Nutritional Info!")
       }else{
       this.setState({
           singleFood: foodObj.report.foods[0].nutrients,

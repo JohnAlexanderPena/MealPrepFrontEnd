@@ -92,7 +92,8 @@ journalEntry = (entryObj) => {
   }
 
   changePlan = (event) => {
-    console.log(event)
+
+    console.log(event, this.props.currentUser.id)
     fetch(`http://localhost:3000/packages/${this.props.currentUser.id}`, {
       method: "PATCH",
       headers: {
@@ -100,7 +101,7 @@ journalEntry = (entryObj) => {
     "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        id: this.props.currentUser.id,
+        user_id: this.props.currentUser.id,
         name: event
       })
     })

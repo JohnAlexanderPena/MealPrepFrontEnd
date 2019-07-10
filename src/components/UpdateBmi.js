@@ -19,7 +19,7 @@ const changePlan = (props) => {
         <p>
           <b>6 Meals Per Week</b> $49.99/week
         </p>
-        <Button value="balanced" onClick={() => props.changePlan("Balanced")}>Choose</Button>
+        <Button value="balanced" onClick={() => props.changePlan("Balance")}>Choose</Button>
       </Grid.Column>
       <Grid.Column textAlign='center'>
         <Header as='h4'>Heavy Plan</Header>
