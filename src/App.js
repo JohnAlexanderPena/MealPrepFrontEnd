@@ -25,7 +25,7 @@ componentDidMount() {
   render(){
     return (
       <Router>
-        <MainContainer packages={this.state.packages}/>
+        <MainContainer {...this.props} packages={this.state.packages}/>
       </Router>
     )
   }

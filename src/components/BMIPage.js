@@ -9,20 +9,31 @@ class getBmi extends React.Component{
 
 state = {
   packages: [],
-  bmi: 0
+  bmi: null
 }
 
 componentDidMount() {
-  // let result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
+  debugger;
+  let result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
 
   fetch('http://localhost:3000/packages')
   .then(resp => resp.json())
   .then(response => {
     this.setState({
       packages: response,
-      bmi: 0
+      bmi: result
     })
-  })
+  }).then(fetch(`http://localhost:3000/users/${this.props.currentUser.id}`, {
+      method: "PATCH",
+      headers: {
+    "Accept": "application/json",
+    "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        bmi: result,
+        })
+    })
+  )
 }
 
 
@@ -49,6 +60,8 @@ componentDidMount() {
   }
 
   handleClick = (event) => {
+    // const result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
+    // debugger;
     fetch("http://localhost:3000/packages", {
       method: "POST",
       headers: {
@@ -62,26 +75,17 @@ componentDidMount() {
         quantiy: event.target.id
       })
     })
-    .then(fetch(`http://localhost:3000/users/${this.props.currentUser.id}`, {
-        method: "PATCH",
-        headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          bmi: this.state.bmi,
-        })
-    })
-  )
   this.props.history.push("/journal")
+  window.location.reload();
 }
 
 render(){
+
 return(
   <div>
       <Header colro='blue' as='h1'>
           Results are not always guaranteed to be representative of actual recommended weight.
-      <Header.Subheader>{}!!</Header.Subheader>
+      <Header.Subheader>{this.bmiResults()}.</Header.Subheader>
     </Header>
       <Card.Group centered >
       <Card>

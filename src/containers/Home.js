@@ -4,7 +4,7 @@ import Navbar from '../../src/components/Navbar'
 // import PackagePage from '../../src/components/PackagePage'
 import MealContainer from './MealContainer'
 import Journal from './Journal'
-// import BMIPage from '../../src/components/BMIPage'
+import ShoppingCart from '../../src/components/ShoppingCart'
 import Profile from '../../src/components/Profile'
 
 
@@ -16,6 +16,7 @@ state = {
   journals: [],
   packages: [],
   articles: [],
+  clickedMeals: [] //settingStateOfClickedMeals
 }
 
 
@@ -104,16 +105,24 @@ journalEntry = (entryObj) => {
     })
   }
 
+  addToCart = (id) => {
+   const foundMeal = (this.state.meals.filter(meal => meal.id == id ))
+    this.setState({
+      clickedMeals: [...this.state.clickedMeals, foundMeal]
+    })
+  }
 
 
 
   render() {
+    console.log(this.state.clickedMeals, this.state.meals)
     return (
       <Router>
         <Navbar signOutUser={this.props.signOutUser}/>
-            <Route path="/profile" render={() => <Profile changePlan={this.changePlan} currentUser={this.props.currentUser} packages={this.state.packages}/>}/>
-            <Route path="/meals" render={() => <MealContainer currentUser={this.props.currentUser} meals={this.state.meals} />}/>
-            <Route path="/journal" render={() => <Journal journalEntry={this.journalEntry} currentUser={this.props.currentUser} journals={this.state.journals}/>}/>
+            <Route path="/profile" render={(routerProps) => <Profile changePlan={this.changePlan} currentUser={this.props.currentUser} packages={this.state.packages}/>}/>
+            <Route path="/checkout" render={(routerProps) => <ShoppingCart meals={this.state.meals} clickedMeals={this.state.clickedMeals} addToCart={this.addToCart} changePlan={this.changePlan} currentUser={this.props.currentUser} packages={this.state.packages}/>}/>
+            <Route path="/meals" render={(routerProps) => <MealContainer addToCart={this.addToCart} currentUser={this.props.currentUser} meals={this.state.meals} />}/>
+            <Route path="/journal" render={(routerProps) => <Journal journalEntry={this.journalEntry} currentUser={this.props.currentUser} journals={this.state.journals}/>}/>
     </Router>
     );
   }

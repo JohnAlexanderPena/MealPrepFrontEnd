@@ -4,7 +4,7 @@ import Login from '../../src/components/Login'
 import SignUp from '../../src/components/SignUp'
 import Home from './Home'
 import BMIPage from '../../src/components/BMIPage'
-// import Profile from '../../src/components/Profile'
+import ShoppingCart from '../../src/components/ShoppingCart'
 
 
 class MainContainer extends Component {
@@ -13,7 +13,7 @@ state = {
   signUpClicked: false,
   loggedIn: false,
   currentUser: null,
-  packages: []
+  packages: [],
 }
 
 handleSignUpClick = () => {
@@ -48,6 +48,7 @@ componentDidMount(){
           })
         }
       })
+      // window.history.push('/journal')
     }
   }
 
@@ -74,11 +75,15 @@ setCurrentUser = (data) => {
     })
   }
 
+
+
+
   render() {
     return (
       <Router>
         <Switch>
             <Route path="/signup" render={(routerProps) => <SignUp getPackages={this.getPackages} packages={this.state.packages} setCurrentUser={this.setCurrentUser} handleLoggedIn={this.handleLoggedIn} {...routerProps}/>}/>
+            <Route path="/checkout" render={(routerProps) => <ShoppingCart addToCart={this.addToCart} changePlan={this.changePlan} currentUser={this.props.currentUser} packages={this.state.packages}/>}/>
             <Route path="/bmi" render={(routerProps) => <BMIPage packages={this.state.packages} {...routerProps} currentUser={this.state.currentUser}/>} />
             <Route path="/" render={(routerProps) => (this.state.loggedIn === true) ?
                   <Home {...routerProps} packages={this.state.packages} getPackages={this.getPackages} loggedIn={this.state.loggedIn} currentUser={this.state.currentUser} signOutUser={this.signOutUser} handleLoggedIn={this.handleLoggedIn}/>

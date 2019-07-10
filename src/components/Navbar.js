@@ -46,13 +46,20 @@ import {  NavLink } from 'react-router-dom'
         >
           Packages
         </Menu.Item>
-
         <Menu.Item position="right"
+          onClick={null}
+          as={NavLink} to="/checkout" name='checkout'
+          active={activeItem === 'sign-in'}
+          >
+          Checkout
+        </Menu.Item>
+        <Menu.Item
           onClick={this.props.signOutUser}
+
           as={NavLink} to="/" name='login'
           active={activeItem === 'sign-in'}
           >
-          Sign-out
+          Sign-Out
         </Menu.Item>
       </Menu>
     )

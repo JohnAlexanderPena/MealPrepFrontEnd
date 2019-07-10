@@ -21,11 +21,11 @@ handleFilter = (event) => {
 }
 
 buyMeal = (event) => {
-  console.log(event.target.id)
+  const id = event.target.id
+    this.props.addToCart(id)
 }
 
   render() {
-  // debugger;
     return (
     <Fragment>
       <Button value="vegetarian" onClick={this.handleFilter}>Show Vegetarian Meals Only</Button>
@@ -50,7 +50,7 @@ buyMeal = (event) => {
                   </Item.Meta>
                   <Item.Description> Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.!</Item.Description>
                   <Item.Extra>
-                    <Button id={meal.id} onClick={this.buyMeal}primary floated='right'>
+                    <Button id={meal.id} onClick={this.buyMeal} primary floated='right'>
                       Buy Meal
                       <Icon name='right chevron'/>
                     </Button>

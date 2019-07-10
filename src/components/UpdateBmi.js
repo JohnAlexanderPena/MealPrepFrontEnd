@@ -6,7 +6,6 @@ import { Header, Button, Popup, Grid } from 'semantic-ui-react'
 // const pk = this.props.packages.filter(pck => pck.user_id === this.props.currentUser.id)
 
 const changePlan = (props) => {
-  console.log(props, " BMI PAGE")
   return (<Popup trigger={<Button color='blue'>View/Change Package</Button>} flowing hoverable>
     <Grid centered divided columns={3}>
       <Grid.Column textAlign='center'>
