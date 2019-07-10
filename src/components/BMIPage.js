@@ -22,6 +22,8 @@ componentDidMount() {
 }
 
 
+
+
  bmiResults = () => {
 
   let result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
@@ -31,7 +33,7 @@ componentDidMount() {
     }else if(result > 18.5 && result <24.9){
       return `Your BMI of ${result} shows you are at a healthy weight and we recommend the Balanced Package`
     }else if(result >= 25 && result < 29.9){
-      return `Your BMI of ${result} shows you are above the recommended weight and we recommend either the Slim Package`
+      return `Your BMI of ${result} shows you are above the recommended weight and we recommend the Slim Package`
     }else if(result >= 30 && result < 40){
       return `Your BMI of ${result} shows your are above the recommended wieght and we recommend the Slim Package`
     }else if(result >= 40){
@@ -41,7 +43,11 @@ componentDidMount() {
     }
   }
 
+  handleClick = (event) => {
+    console.log(event.target.name)
+  }
 render(){
+  console.log(this.props.currentUser.id)
 return(
   <div>
     <h3>Results are not always guaranteed to be representative of actual recommended weight.</h3>
@@ -59,7 +65,7 @@ return(
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-            <Button basic color='blue'>
+            <Button  onClick={this.handleClick} name="Heavy" basic color='blue'>
               Choose
             </Button>
         </Card.Content>
@@ -76,7 +82,7 @@ return(
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-            <Button basic color='blue'>
+            <Button onClick={this.handleClick} name="Balance"basic color='blue'>
               Choose
             </Button>
         </Card.Content>
@@ -91,7 +97,7 @@ return(
           <Card.Description>This package is geared towards helping you eat healthier with the perfect combination of low calories, protein, and low fats.</Card.Description>
         </Card.Content>
         <Card.Content extra>
-            <Button basic color='blue'>
+            <Button  onClick={this.handleClick} name="Light" basic color='blue'>
               Choose
             </Button>
         </Card.Content>

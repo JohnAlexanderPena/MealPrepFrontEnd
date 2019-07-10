@@ -8,7 +8,6 @@ import UpdateBmi from './UpdateBmi'
 class Profile extends Component {
 
   render() {
-    console.log(this.props.currentUser, "INSIDE PROFILE COMPONENT")
     const pack = this.props.packages.filter(pck => pck.id === this.props.currentUser.id)
     return (
       <div>

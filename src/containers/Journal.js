@@ -104,6 +104,7 @@ render() {
       <div>
         <h1>Enter Cheat Food</h1>
           <Input
+              placeholder="Search Foods"
               onChange={this.handleChange}
               name="searchTerm"
             /><Button color='blue' onClick={this.findFoods}>Search Foods</Button>
