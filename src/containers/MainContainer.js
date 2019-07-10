@@ -75,6 +75,7 @@ setCurrentUser = (data) => {
   }
 
   render() {
+    // console.log("1st Mount")
     return (
       <Router>
         <Switch>

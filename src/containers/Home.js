@@ -34,7 +34,6 @@ componentDidMount(){
   fetch('http://localhost:3000/meals')
   .then(res => res.json())
   .then(meals => {
-
     this.setState({
       meals: meals
     })
@@ -109,6 +108,7 @@ journalEntry = (entryObj) => {
 
 
   render() {
+    // console.log("2nd Mount")
     return (
       <Router>
         <Navbar signOutUser={this.props.signOutUser}/>
