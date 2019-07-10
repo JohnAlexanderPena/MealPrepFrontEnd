@@ -12,7 +12,7 @@ class MainContainer extends Component {
 state = {
   signUpClicked: false,
   loggedIn: false,
-  currentUser: this.props.currentUser,
+  currentUser: null,
   packages: []
 }
 
@@ -28,7 +28,6 @@ getPackages = (obj) => {
     loggedIn: !this.state.loggedIn
   })
 }
-
 
 componentDidMount(){
     const token = localStorage.getItem("token")
@@ -79,11 +78,10 @@ setCurrentUser = (data) => {
     return (
       <Router>
         <Switch>
-            <Route path="/profile" render={(routerProps) => <Profile setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} packages={this.state.packages}/>}/>
             <Route path="/signup" render={(routerProps) => <SignUp getPackages={this.getPackages} packages={this.state.packages} setCurrentUser={this.setCurrentUser} handleLoggedIn={this.handleLoggedIn} {...routerProps}/>}/>
-            <Route path="/bmi" render={(routerProps) => <BMIPage packages={this.state.packages} currentUser={this.state.currentUser}/>} />
+            <Route path="/bmi" render={(routerProps) => <BMIPage packages={this.state.packages} {...routerProps} currentUser={this.state.currentUser}/>} />
             <Route path="/" render={(routerProps) => (this.state.loggedIn === true) ?
-                  <Home {...routerProps} getPackages={this.getPackages} loggedIn={this.state.loggedIn} currentUser={this.state.currentUser} signOutUser={this.signOutUser} handleLoggedIn={this.handleLoggedIn}/>
+                  <Home {...routerProps} packages={this.state.packages} getPackages={this.getPackages} loggedIn={this.state.loggedIn} currentUser={this.state.currentUser} signOutUser={this.signOutUser} handleLoggedIn={this.handleLoggedIn}/>
                                 :
                   <Login {...routerProps} currentUser={this.state.currentUser} setCurrentUser ={this.setCurrentUser} handleSignUpClick={this.handleSignUpClick} loggedIn={this.state.loggedIn} handleLoggedIn={this.handleLoggedIn}/> }/>
         </Switch>

@@ -92,8 +92,6 @@ journalEntry = (entryObj) => {
   }
 
   changePlan = (event) => {
-
-    console.log(event, this.props.currentUser.id)
     fetch(`http://localhost:3000/packages/${this.props.currentUser.id}`, {
       method: "PATCH",
       headers: {
@@ -111,7 +109,6 @@ journalEntry = (entryObj) => {
 
 
   render() {
-    console.log(this.props.currentUser, "INSIDE HOME COMPONENT")
     return (
       <Router>
         <Navbar signOutUser={this.props.signOutUser}/>

@@ -7,8 +7,12 @@ import UpdateBmi from './UpdateBmi'
 
 class Profile extends Component {
 
+
+
   render() {
+    // console.log(this.state, this.props.packages, "USER_ID", this.props.packages[0].user.id, "USER.ID")
     const pack = this.props.packages.filter(pck => pck.user_id === this.props.currentUser.id)
+
     return (
       <div>
   <List>
@@ -26,7 +30,7 @@ class Profile extends Component {
         <Grid.Column>
           <Header icon>
             <Icon name='food' />
-            Current Package: {pack[0].name} Package
+            Current Package: {console.log(pack[0], "WHAT THE EFFF")}  Package
           </Header>
           <UpdateBmi changePlan={this.props.changePlan} color="blue"/>
         </Grid.Column>

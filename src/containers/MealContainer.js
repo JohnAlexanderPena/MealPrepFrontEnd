@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import {  Button, Search, Card, Item, Label, Image, Icon } from 'semantic-ui-react'
+import {  Button, Item, Label, Icon } from 'semantic-ui-react'
 
 
 class MealContainer extends Component {
