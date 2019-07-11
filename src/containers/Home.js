@@ -92,6 +92,7 @@ journalEntry = (entryObj) => {
   }
 
   changePlan = (event) => {
+    debugger;
     fetch(`http://localhost:3000/packages/${this.props.currentUser.id}`, {
       method: "PATCH",
       headers: {
