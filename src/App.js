@@ -16,12 +16,12 @@ componentDidMount() {
   fetch(`http://localhost:3000/packages`)
           .then(resp => resp.json())
           .then(resp => {
-            console.log(resp)
             this.setState({
               packages: resp
             })
       })
 }
+
   render(){
     return (
       <Router>

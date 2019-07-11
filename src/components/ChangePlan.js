@@ -30,7 +30,7 @@ const changePlan = (props) => {
         <Button as={NavLink} to="/journal" value="heavy" onClick={() => props.changePlan("Heavy")}>Choose</Button>
       </Grid.Column>
       <Grid.Column textAlign='center'>
-        <Header color='blue' as='h4'><strong>Current Plan:{pk[0].name} </strong></Header>
+        <Header color='blue' as='h4'><strong>Current Plan: { props.packages.length <= 0 || pk === undefined ? <div>Loading</div> : <div>{pk[0].name}</div> }</strong></Header>
         <p>
           <b>6 Meals Per Week</b> $49.99/week
           </p>

@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { List, Image, Icon, Header, Segment, Grid, Button, Popup, Form } from 'semantic-ui-react'
 import {  NavLink } from 'react-router-dom'
-import UpdateBmi from './UpdateBmi'
-import newBMI from './newBMI'
+import ChangePlan from './ChangePlan'
+// import newBMI from './newBMI'
 
 
 
@@ -12,7 +12,7 @@ class Profile extends Component {
     weight: 0,
     height: 0
   }
-  
+
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -37,7 +37,7 @@ class Profile extends Component {
 
 
   render() {
-    console.log(this.props.packages.length)
+    const pk = this.props.packages.filter(pck => pck.user_id === this.props.currentUser.id)
     return (
       <div>
   <List>
@@ -55,9 +55,9 @@ class Profile extends Component {
         <Grid.Column>
           <Header icon>
             <Icon name='food' />
-            Meals
+              Current Plan: { this.props.packages.length <= 0 || pk === undefined ? <div>Loading</div> : <div>{pk[0].name}</div> }
           </Header>
-            <UpdateBmi currentUser={this.props.currentUser} packages={this.props.packages} changePlan={this.props.changePlan} color="blue"/>
+            <ChangePlan currentUser={this.props.currentUser} packages={this.props.packages} changePlan={this.props.changePlan} color="blue"/>
         </Grid.Column>
             <Grid.Column>
           <Header icon>

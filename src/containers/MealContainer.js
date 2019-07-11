@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import {  Button, Item, Label, Icon } from 'semantic-ui-react'
+import {  Button, Item, Label, Icon, Popup } from 'semantic-ui-react'
 
 
 class MealContainer extends Component {
@@ -31,8 +31,8 @@ buyMeal = (event) => {
       <Button value="vegetarian" onClick={this.handleFilter}>Show Vegetarian Meals Only</Button>
       <Button value="all" onClick={this.handleFilter}>Show All</Button>
       <Item.Group divided>
-            {this.state.filteredMeals.map((meal, index) => {
-              return <Item key={index}>
+            {this.state.filteredMeals.map((meal) => {
+              return <Item key={meal.id}>
                       <Item.Image src={meal.image} />
                 <Item.Content>
                   <Item.Header as='a'>{meal.name}</Item.Header>
@@ -50,10 +50,12 @@ buyMeal = (event) => {
                   </Item.Meta>
                   <Item.Description> Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.!</Item.Description>
                   <Item.Extra>
-                    <Button id={meal.id} onClick={this.buyMeal} primary floated='right'>
-                      Buy Meal
-                      <Icon name='right chevron'/>
-                    </Button>
+                    <Popup
+                       trigger={<Button id={meal.id} onClick={this.buyMeal} primary floated='right'>Buy me<Icon name='right chevron'/></Button>}
+                      content='Added To Cart'
+                       on='click'
+                       hideOnScroll
+                     />
                     <Label>{meal.veggie}</Label>
                   </Item.Extra>
                 </Item.Content>
@@ -66,8 +68,12 @@ buyMeal = (event) => {
 }
 
 export default MealContainer;
-
 //
-// <Search position='right'
-//   onSearchChange={this.handleChange}
-//   name="searchTerm"/>
+// <React.Fragment>
+//   <Popup
+//     trigger={<Button id={meal.id} onClick={this.buyMeal} primary floated='right'>Buy me<Icon name='right chevron'/></Button>}
+//     content='Hide the popup on any scroll event'
+//     on='click'
+//     hideOnScroll
+//   />
+// </React.Fragment>

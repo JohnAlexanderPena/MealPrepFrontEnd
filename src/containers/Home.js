@@ -92,7 +92,6 @@ journalEntry = (entryObj) => {
   }
 
   changePlan = (event) => {
-    debugger;
     fetch(`http://localhost:3000/packages/${this.props.currentUser.id}`, {
       method: "PATCH",
       headers: {
@@ -104,6 +103,7 @@ journalEntry = (entryObj) => {
         name: event
       })
     })
+    window.location.reload();
   }
 
   addToCart = (id) => {
@@ -116,7 +116,6 @@ journalEntry = (entryObj) => {
 
 
   render() {
-    console.log(this.state.clickedMeals, this.state.meals)
     return (
       <Router>
         <Navbar signOutUser={this.props.signOutUser}/>

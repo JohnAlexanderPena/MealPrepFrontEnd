@@ -30,6 +30,7 @@ getPackages = (obj) => {
 }
 
 componentDidMount(){
+  console.log("MOUNTING MAIN CONTAINER")
     const token = localStorage.getItem("token")
     if (token){
       fetch(`http://localhost:3000/auto_login`, {
@@ -39,6 +40,7 @@ componentDidMount(){
       })
       .then(res => res.json())
       .then(response => {
+        console.log(response)
         if (response.errors){
           alert(response.errors)
         } else {
@@ -48,7 +50,9 @@ componentDidMount(){
           })
         }
       })
-      // window.history.push('/journal')
+    }
+    else {
+      window.history.push('/journal')
     }
   }
 
@@ -59,7 +63,7 @@ handleLoggedIn = () => {
     })
   }
 
-  signOutUser = () => {
+signOutUser = () => {
     localStorage.removeItem('token')
     this.setState({
       loggedIn: !this.state.loggedIn
