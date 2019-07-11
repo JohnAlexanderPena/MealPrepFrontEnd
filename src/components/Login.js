@@ -46,7 +46,7 @@ handleChange = (event) => {
 
 render() {
   return (
-  <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+  <Grid textAlign='center' color="blue" verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
       <Header as='h2' color='black' textAlign='center'>
         <Image src="https://i.imgur.com/BtZWQ9i.png"/> Log-in to your account
@@ -63,14 +63,14 @@ render() {
             type='password'
             name="password"
           />
-          <Button type="submit" color='black' fluid size='large'>
+        <Button color='blue' type="submit" fluid size='large'>
               Login
           </Button>
         </Segment>
       </Form>
       <Message>
         <NavLink to="/signup">
-          <Button color='black'>New to us? Sign Up</Button>
+          <Button color='blue'>New to us? Sign Up</Button>
         </NavLink>
       </Message>
     </Grid.Column>

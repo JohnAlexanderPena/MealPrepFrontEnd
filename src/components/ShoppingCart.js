@@ -9,6 +9,7 @@ class ShoppingCart extends Component {
 
       return(
         <div>
+          <h3 style={{ 'text-align': 'center' }}>UNDER CONSTRUCTION, PLEASE BE VERY CAREFUL!</h3>
         <Grid textAlign="center"><Grid.Column textAlign="center">
       <Item.Group textAlign="center">{this.props.clickedMeals.map(meal => {
           return<Item key={meal.id} textAlign="center">

@@ -12,8 +12,10 @@ state = {
   bmi: null
 }
 
+
+
 componentDidMount() {
-  debugger;
+
   let result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
 
   fetch('http://localhost:3000/packages')
@@ -60,7 +62,7 @@ componentDidMount() {
   }
 
   handleClick = (event) => {
-    // const result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
+    const result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
     // debugger;
     fetch("http://localhost:3000/packages", {
       method: "POST",
@@ -83,10 +85,11 @@ render(){
 
 return(
   <div>
-      <Header colro='blue' as='h1'>
+      <div color="blue" style={{'text-align': 'center', 'color': 'rgb(41,135,205)'}}>
+        <strong><h3>
           Results are not always guaranteed to be representative of actual recommended weight.
-      <Header.Subheader>{this.bmiResults()}.</Header.Subheader>
-    </Header>
+      <h3>{this.bmiResults()}</h3></h3></strong>
+      </div>
       <Card.Group centered >
       <Card>
         <Card.Content>
@@ -102,7 +105,7 @@ return(
         <Card.Content extra>
             <Button  onClick={this.handleClick} id="8" value="60" name="Heavy" basic color='blue'>
               Choose
-            </Button>
+            </Button>8 Meals/week - $69.99
         </Card.Content>
       </Card>
       <Card>
@@ -119,7 +122,7 @@ return(
         <Card.Content extra>
             <Button onClick={this.handleClick} id="6" value="50" name="Balance"basic color='blue'>
               Choose
-            </Button>
+            </Button>6 Meals/week - $59.99
         </Card.Content>
       </Card>
       <Card>
@@ -134,7 +137,7 @@ return(
         <Card.Content extra>
             <Button  onClick={this.handleClick} id="4" value="38" name="Light" basic color='blue'>
               Choose
-            </Button>
+            </Button>5 Meals/week - $49.99
         </Card.Content>
       </Card>
     </Card.Group>

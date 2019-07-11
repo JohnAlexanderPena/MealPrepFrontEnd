@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Grid, Header, Image } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Checkbox } from 'semantic-ui-react'
 import {  NavLink } from 'react-router-dom'
 
 
@@ -13,7 +13,8 @@ state = {
   passwordConfirmation: "",
   age: null,
   weight:null,
-  height: null
+  height: null,
+  checked: false
 }
 
 handleChange = (event) => {
@@ -23,6 +24,9 @@ handleChange = (event) => {
 	}
 
   createUser = () => {
+    if(this.state.checked === false ){
+      alert("Missing Info/Did Not Click Checkbox")
+    }else{
 		if (this.state.password === !this.state.passwordConfirmation ){
       alert("Make Sure Passwords Match!")
     }else{
@@ -44,6 +48,7 @@ handleChange = (event) => {
 				}
 			})
 		}
+  }
 	}
 
 	handleSubmit = (event) => {
@@ -57,6 +62,13 @@ handleChange = (event) => {
 			alert("Passwords don't match!")
 		}
 	}
+
+  loginClick = () => {
+    this.props.history.push('/login')
+  }
+
+  toggle = () => this.setState(prevState => ({ checked: !prevState.checked }))
+
 
 render(){
   return (
@@ -79,11 +91,11 @@ render(){
             <Form.Input onChange={this.handleChange}  type="number" name='age' placeholder='Age' />
             <Form.Input onChange={this.handleChange}  type="number" name='height' placeholder='Height(inches)' />
           </Form.Group>
-          <Form.Checkbox label='I agree that this is not an official dietary regimen.' />
-            <Button type="submit">
+          <Form.Checkbox onChange={this.toggle} checked={this.state.checked} label='I agree that this is not an official dietary regimen.' />
+            <Button color='blue' type="submit">
               Submit
             </Button>
-            <Button as={ NavLink } to="/" type="submit">Back to Login</Button>
+            <Button onClick={this.loginClick} color='blue' to="/" type="submit">Back to Login</Button>
         </Form>
   </Grid.Column>
   </Grid>

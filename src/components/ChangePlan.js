@@ -18,21 +18,21 @@ const changePlan = (props) => {
       <Grid.Column textAlign='center'>
         <Header as='h4'>Balanced Plan</Header>
         <p>
-          <b>6 Meals Per Week</b> $49.99/week
+          <b>4 Meals Per Week</b> $49.99/week
         </p>
         <Button as={NavLink} to="/journal" value="balanced" onClick={() => props.changePlan("Balance")}>Choose</Button>
       </Grid.Column>
       <Grid.Column textAlign='center'>
         <Header as='h4'>Heavy Plan</Header>
         <p>
-          <b>8 Meals Per Week</b> $59.99/week
+          <b>6 Meals Per Week</b> $59.99/week
         </p>
         <Button as={NavLink} to="/journal" value="heavy" onClick={() => props.changePlan("Heavy")}>Choose</Button>
       </Grid.Column>
       <Grid.Column textAlign='center'>
         <Header color='blue' as='h4'><strong>Current Plan: { props.packages.length <= 0 || pk === undefined ? <div>Loading</div> : <div>{pk[0].name}</div> }</strong></Header>
         <p>
-          <b>6 Meals Per Week</b> $49.99/week
+          <b>8 Meals Per Week</b> $49.99/week
           </p>
         </Grid.Column>
     </Grid>

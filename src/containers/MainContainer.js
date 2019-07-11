@@ -51,9 +51,9 @@ componentDidMount(){
         }
       })
     }
-    else {
-      window.history.push('/journal')
-    }
+    // else {
+    //   window.history.push('/journal')
+    // }
   }
 
 
