@@ -1,5 +1,5 @@
 import React from 'react'
-import {  NavLink } from 'react-router-dom'
+// import {  NavLink } from 'react-router-dom'
 import { Button, Card, Header, Icon } from 'semantic-ui-react'
 
 
@@ -62,7 +62,7 @@ componentDidMount() {
   }
 
   handleClick = (event) => {
-    const result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
+    // const result = Math.ceil(703 * this.props.currentUser.weight/(this.props.currentUser.height ** 2))
     // debugger;
     fetch("http://localhost:3000/packages", {
       method: "POST",
@@ -77,8 +77,12 @@ componentDidMount() {
         quantiy: event.target.id
       })
     })
-  this.props.history.push("/journal")
+  this.props.history.push("/profile")
   window.location.reload();
+}
+
+chooseLater = () => {
+  this.props.history.push('/profile')
 }
 
 render(){
@@ -148,4 +152,5 @@ return(
 
 export default getBmi
 
+// <Button onClick={this.chooseLater}>Choose Later</Button>
 // <Button as={NavLink} to="/journal">Home</Button>
