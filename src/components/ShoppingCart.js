@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Item, Grid } from 'semantic-ui-react'
+import { Image, Item, Grid, Table, Header, semanticUIReact   } from 'semantic-ui-react'
 
 
 class ShoppingCart extends Component {
@@ -8,39 +8,64 @@ class ShoppingCart extends Component {
     let total = 0
 
       return(
-        <div>
-          <h3 style={{ 'text-align': 'center' }}>UNDER CONSTRUCTION, PLEASE BE VERY CAREFUL!</h3>
-        <Grid textAlign="center"><Grid.Column textAlign="center">
-      <Item.Group textAlign="center">{this.props.clickedMeals.map(meal => {
-          return<Item key={meal.id} textAlign="center">
-      <Item.Content>
-        <Item.Header as='a'>{meal[0].name}</Item.Header>
-        <Item.Meta>{meal[0].veggie}</Item.Meta>
-        <Item.Description>
-          <Item.Image textAlign="center" size='tiny' src={meal[0].image} />
-        </Item.Description>
-        <Item.Extra>Price: ${meal[0].price}</Item.Extra>
-      </Item.Content>
-    </Item>
+        <Grid centered>
+          <Table style={{width: '800px', height: '800px' , textAlign: 'center'}} basic='very' centered celled collapsing>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Item</Table.HeaderCell>
+                <Table.HeaderCell>Price</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header><Table.Body>{this.props.clickedMeals.map(meal => {
+          return<Table.Row>
+              <Table.Cell>
+                <Header as='h4' image>
+                  <Image src={meal[0].image} rounded size='mini' />
+                  <Header.Content>
+                    {meal[0].name}
+                    <Header.Subheader>{meal[0].veggie}</Header.Subheader>
+                  </Header.Content>
+                </Header>
+              </Table.Cell>
+              <Table.Cell >${meal[0].price}</Table.Cell>
+            </Table.Row>
+
         })}
-  </Item.Group>
-  </Grid.Column>
-</Grid>
-<h3 style={{'text-align': 'center'}}>
-Your Total is:
-<strong>
-      {this.props.clickedMeals.map( meal => {
-         total += meal[0].price
-      })}${total}</strong>
-      </h3>
-</div>
+        <h3 style={{'text-align': 'center'}}>
+        Your Total is:
+        <strong>
+              {this.props.clickedMeals.map( meal => {
+                 total += meal[0].price
+              })}${total}</strong>
+              </h3>
+        </Table.Body>
+  </Table>
+    </Grid>
     )
   }
 }
 
 export default ShoppingCart;
-// <Grid>
-//     <Grid.Column textAlign="center">
-//       <Button>contact us</Button>
-//     </Grid.Column>
-//   </Grid>
+
+// <Table basic='very' celled collapsing>
+//   <Table.Header>
+//     <Table.Row>
+//       <Table.HeaderCell>Item</Table.HeaderCell>
+//       <Table.HeaderCell>Price</Table.HeaderCell>
+//     </Table.Row>
+//   </Table.Header>
+//
+//   <Table.Body>
+//     <Table.Row>
+//       <Table.Cell>
+//         <Header as='h4' image>
+//           <Image src={meal[0].image} rounded size='mini' />
+//           <Header.Content>
+//             {meal[0].name}
+//             <Header.Subheader>{meal[0].veggie}</Header.Subheader>
+//           </Header.Content>
+//         </Header>
+//       </Table.Cell>
+//       <Table.Cell>${meal[0].price}</Table.Cell>
+//     </Table.Row>
+//   </Table.Body>
+// </Table>
