@@ -103,8 +103,8 @@ render() {
   const filteredJournals = this.props.journals.filter(entry => entry.user_id === this.props.currentUser.id)
 
     return (
-      <div>
-        <h1>Enter Cheat Food</h1>
+      <div style={{textAlign: 'center'}}>
+        <h3 style={{textAlign: 'center', color: 'rgb(41,135,205)'}}><strong>Search for and add foods to keep track of your macros!</strong></h3>
           <Input
               placeholder="Search Foods"
               onChange={this.handleChange}
@@ -123,10 +123,11 @@ render() {
           Nutritional Information
         </Header>
       </Divider>
-
+<div style={{textAlign: '50%'}}>
     {this.state.singleFood.map(nutrient => {
       return <NutrientInfo key={nutrient} nutrient={nutrient}/>
     })}
+  </div>
           <Divider color='blue' horizontal>
             <Header as='h2'>
               <Icon color='blue' name='book' />

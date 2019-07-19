@@ -51,7 +51,7 @@ import {  NavLink } from 'react-router-dom'
           as={NavLink} to="/checkout" name='checkout'
           active={activeItem === 'sign-in'}
           >
-          Checkout
+          Cart
         </Menu.Item>
         <Menu.Item
           onClick={this.props.signOutUser}

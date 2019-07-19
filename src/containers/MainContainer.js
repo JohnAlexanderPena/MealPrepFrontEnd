@@ -14,6 +14,7 @@ state = {
   loggedIn: false,
   currentUser: null,
   packages: [],
+  meals: [],
 }
 
 handleSignUpClick = () => {
@@ -30,7 +31,6 @@ getPackages = (obj) => {
 }
 
 componentDidMount(){
-  console.log("MOUNTING MAIN CONTAINER")
     const token = localStorage.getItem("token")
     if (token){
       fetch(`http://localhost:3000/auto_login`, {
@@ -40,7 +40,6 @@ componentDidMount(){
       })
       .then(res => res.json())
       .then(response => {
-        console.log(response)
         if (response.errors){
           alert(response.errors)
         } else {
@@ -51,9 +50,14 @@ componentDidMount(){
         }
       })
     }
-    // else {
-    //   window.history.push('/journal')
-    // }
+    fetch('http://localhost:3000/meals')
+    .then(resp => resp.json())
+    .then(response => {
+      console.log(response)
+      this.setState({
+        meals: response
+      })
+    })
   }
 
 
@@ -83,6 +87,7 @@ setCurrentUser = (data) => {
 
 
   render() {
+    console.log(this.state.meals)
     return (
       <Router>
         <Switch>
@@ -90,7 +95,7 @@ setCurrentUser = (data) => {
             <Route path="/checkout" render={(routerProps) => <ShoppingCart centered addToCart={this.addToCart} changePlan={this.changePlan} currentUser={this.props.currentUser} packages={this.state.packages}/>}/>
             <Route path="/bmi" render={(routerProps) => <BMIPage packages={this.state.packages} {...routerProps} currentUser={this.state.currentUser}/>} />
             <Route path="/" render={(routerProps) => (this.state.loggedIn === true) ?
-                  <Home {...routerProps} packages={this.state.packages} getPackages={this.getPackages} loggedIn={this.state.loggedIn} currentUser={this.state.currentUser} signOutUser={this.signOutUser} handleLoggedIn={this.handleLoggedIn}/>
+                  <Home {...routerProps} packages={this.state.packages} meals={this.state.meals}getPackages={this.getPackages} loggedIn={this.state.loggedIn} currentUser={this.state.currentUser} signOutUser={this.signOutUser} handleLoggedIn={this.handleLoggedIn}/>
                                 :
                   <Login {...routerProps} currentUser={this.state.currentUser} setCurrentUser ={this.setCurrentUser} handleSignUpClick={this.handleSignUpClick} loggedIn={this.state.loggedIn} handleLoggedIn={this.handleLoggedIn}/> }/>
         </Switch>
@@ -101,10 +106,3 @@ setCurrentUser = (data) => {
 }
 
 export default MainContainer;
-
-// {
-//   (this.state.loggedIn === true) ?
-//   <Route path="/home" render={(routerProps) => <Home getPackages={this.getPackages}loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}handleLoggedIn={this.handleLoggedIn}/> }/>
-//               :
-//   <Route path="/" render={(routerProps) =>  <Login {...routerProps} setCurrentUser ={this.setCurrentUser} handleSignUpClick={this.handleSignUpClick} loggedIn={this.state.loggedIn} handleLoggedIn={this.handleLoggedIn}/> }/>
-//   }

@@ -12,7 +12,7 @@ import Profile from '../../src/components/Profile'
 class Home extends Component {
 
 state = {
-  meals: [],
+  meals: this.props.meals,
   journals: [],
   packages: [],
   articles: [],
@@ -48,11 +48,6 @@ componentDidMount(){
         })
       })
     )
-    // .then(fetch('https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=3de475525dde45439b65bf3216d76091')
-    // .then(resp => resp.json())
-    // .then(allNews => {
-    //   console.log(allNews)
-    // }))
   }
 }
 
@@ -116,6 +111,7 @@ journalEntry = (entryObj) => {
 
 
   render() {
+    console.log(this.props, this.state)
     return (
       <Router>
         <Navbar signOutUser={this.props.signOutUser}/>
