@@ -4,6 +4,8 @@ import { Button, Form, Grid, Header, Image, Popup, Input } from 'semantic-ui-rea
 class newBmi extends Component {
 
   render() {
+    console.log("NEW BMI")
+
     return (
       <React.Fragment>
         <Popup

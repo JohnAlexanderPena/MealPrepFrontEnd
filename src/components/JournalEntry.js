@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Table } from 'semantic-ui-react'
 
 
 const JournalEntry = (props) => {
+
     return (
       <Fragment>
           <Table.Row>

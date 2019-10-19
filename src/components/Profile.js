@@ -37,6 +37,7 @@ class Profile extends Component {
 
 
   render() {
+
     const pk = this.props.packages.filter(pck => pck.user_id === this.props.currentUser.id)
     return (
       <div>

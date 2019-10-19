@@ -13,8 +13,9 @@ state = {
   signUpClicked: false,
   loggedIn: false,
   currentUser: null,
-  packages: [],
-  meals: [],
+  // packages: [],
+  // meals: [],
+  // journals: [],
 }
 
 handleSignUpClick = () => {
@@ -29,6 +30,7 @@ getPackages = (obj) => {
     loggedIn: !this.state.loggedIn
   })
 }
+
 
 componentDidMount(){
     const token = localStorage.getItem("token")
@@ -50,14 +52,42 @@ componentDidMount(){
         }
       })
     }
-    fetch('http://localhost:3000/meals')
-    .then(resp => resp.json())
-    .then(response => {
-      console.log(response)
-      this.setState({
-        meals: response
-      })
-    })
+    // Promise.all([
+    //   fetch('http://localhost:3000/meals').then(value => value.json()),
+    //   fetch('http://localhost:3000/packages').then(value => value.json()),
+    //   fetch('http://localhost:3000/journals').then(value => value.json()),
+    // ]).then(([meals, packages, journals]) => {
+    //   console.log(meals,packages, journals)
+    //   this.setState({
+    //     meals: meals,
+    //     packages: packages,
+    //     journals: journals
+    //   })
+    // }).catch((err) => {console.log(err)})
+    // .then(resp => resp.json())
+    // .then(response => {
+    //   console.log(response)
+    //   this.setState({
+    //     meals: response
+    //   })
+    // })
+    // .then(
+    //   fetch('http://localhost:3000/packages')
+    //   .then(resp => resp.json())
+    //   .then(response => {
+    //     this.setState({
+    //       packages: response
+    //     })
+    //   })
+    //   .then(fetch('http://localhost:3000/journals')
+    //   .then(resp => resp.json())
+    //   .then(responseObj => {
+    //     this.setState({
+    //       journals: responseObj
+    //         })
+    //       })
+    //     )
+    // )
   }
 
 
@@ -87,7 +117,7 @@ setCurrentUser = (data) => {
 
 
   render() {
-    console.log(this.state.meals)
+    console.log("MOUNTED MAINCONTAINER")
     return (
       <Router>
         <Switch>
@@ -95,7 +125,7 @@ setCurrentUser = (data) => {
             <Route path="/checkout" render={(routerProps) => <ShoppingCart centered addToCart={this.addToCart} changePlan={this.changePlan} currentUser={this.props.currentUser} packages={this.state.packages}/>}/>
             <Route path="/bmi" render={(routerProps) => <BMIPage packages={this.state.packages} {...routerProps} currentUser={this.state.currentUser}/>} />
             <Route path="/" render={(routerProps) => (this.state.loggedIn === true) ?
-                  <Home {...routerProps} packages={this.state.packages} meals={this.state.meals}getPackages={this.getPackages} loggedIn={this.state.loggedIn} currentUser={this.state.currentUser} signOutUser={this.signOutUser} handleLoggedIn={this.handleLoggedIn}/>
+                  <Home {...routerProps} packages={this.state.packages} meals={this.state.meals} getPackages={this.getPackages} loggedIn={this.state.loggedIn} currentUser={this.state.currentUser} signOutUser={this.signOutUser} journals={this.state.journals} handleLoggedIn={this.handleLoggedIn}/>
                                 :
                   <Login {...routerProps} currentUser={this.state.currentUser} setCurrentUser ={this.setCurrentUser} handleSignUpClick={this.handleSignUpClick} loggedIn={this.state.loggedIn} handleLoggedIn={this.handleLoggedIn}/> }/>
         </Switch>

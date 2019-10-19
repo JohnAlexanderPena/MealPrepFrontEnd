@@ -5,6 +5,7 @@ import { Header, Button, Popup, Grid } from 'semantic-ui-react'
 
 
 const changePlan = (props) => {
+
   const pk = props.packages.filter(pck => pck.user_id === props.currentUser.id)
   return (<Popup trigger={<Button color='blue'>View/Change Package</Button>} flowing hoverable>
     <Grid centered divided columns={3}>
@@ -31,9 +32,6 @@ const changePlan = (props) => {
       </Grid.Column>
       <Grid.Column textAlign='center'>
         <Header color='blue' as='h4'><strong>Current Plan: { props.packages.length <= 0 || pk === undefined ? <div>Loading</div> : <div>{pk[0].name}</div> }</strong></Header>
-        <p>
-          <b>8 Meals Per Week</b> $49.99/week
-          </p>
         </Grid.Column>
     </Grid>
     </Popup>)

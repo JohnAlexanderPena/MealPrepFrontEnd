@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Form, TextArea, Input, Divider, Header, Icon, Table } from 'semantic-ui-react'
+import { Button, Input, Divider, Header, Icon, Table } from 'semantic-ui-react'
 import NutrientInfo from '../../src/components/NutrientInfo'
 // import JournalEntry from '../../src/components/JournalEntry'
 
@@ -11,10 +11,12 @@ class Journal extends Component {
     foods: [], //array of found food items
     foodId: "", //id of single selected food from dropdown
     foodToFind: "", //
+    added: "",
     selectedFood: 0, //selected food ID
     singleFood: [], //found fetched food
     journalObj: [], //text for journal entry
     newJournals: [], //newJournals to filter through
+    journals: [],
     newObj: {energy: 0,
       protein: 0,
       sugar: 0,
@@ -23,6 +25,29 @@ class Journal extends Component {
       content: "",
       }
     }
+
+    getNutrients = () => {
+      fetch(`https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=4dEPGqueCE4R1FHqcGYyJG5CAqez9cFnPUHMUtMX&nutrients=205&nutrients=203&nutrients=204&nutrients=208&nutrients=269&ndbno=${this.state.selectedFood}`)
+      .then(resp => resp.json())
+      .then(foodObj => {
+        if (foodObj.errors || foodObj.report.foods[0].nutrients.length === 0){
+          alert("Item Has No Nutritional Info!")
+        }else{
+          this.setState({
+            singleFood: foodObj.report.foods[0].nutrients,
+            newObj: {
+              content: foodObj.report.foods[0].name,
+              energy: foodObj.report.foods[0].nutrients[0].value,
+              protein: foodObj.report.foods[0].nutrients[1].value,
+              sugar: foodObj.report.foods[0].nutrients[2].value,
+              fat: foodObj.report.foods[0].nutrients[3].value,
+              carbs: foodObj.report.foods[0].nutrients[4].value,
+            }
+          })
+        }
+      })
+    }
+
 
   findFoods = (event) => {
     event.preventDefault()
@@ -37,13 +62,12 @@ class Journal extends Component {
       })
     }
   })
-  }
-
+}
 
   handleOptionChange = (event) => {
     this.setState({
       selectedFood: event.target.value
-    })
+    }, () => this.getNutrients())
   }
 
 
@@ -52,11 +76,36 @@ class Journal extends Component {
       journalObj: event.target.value
     })
   }
+  //
+  // componentDidMount() {
+  //   fetch(`http://localhost:3000/users/${this.props.currentUser.id}/get_journals`)
+  //     .then(value => value.json())
+  //       .then(response => {
+  //         this.setState({
+  //           journals: response
+  //         })
+  //       })
+  // }
 
-  submitEntry = () => {
-    this.props.journalEntry(this.state.newObj)
-    // alert('Succesfully Added Entry!')
-  }
+  journalEntry = () => {
+    fetch('http://localhost:3000/journals', {
+      method: "POST",
+      headers: {
+        "Accept":"application/json",
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        energy: this.state.newObj.energy,
+        content: this.state.newObj.content,
+        protein: this.state.newObj.protein,
+        sugar: this.state.newObj.sugar,
+        carbs: this.state.newObj.carbs,
+        fat: this.state.newObj.fat,
+        user_id: this.props.currentUser.id
+        })
+      })
+    }
+
 
   handleChange = (event) => {
     const searchItem = event.target.value.split(" ").join("+")
@@ -65,42 +114,19 @@ class Journal extends Component {
     })
   }
 
-  getNutrients = () => {
-    fetch(`https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=4dEPGqueCE4R1FHqcGYyJG5CAqez9cFnPUHMUtMX&nutrients=205&nutrients=203&nutrients=204&nutrients=208&nutrients=269&ndbno=${this.state.selectedFood}`)
-    .then(resp => resp.json())
-    .then(foodObj => {
-      if (foodObj.errors || foodObj.report.foods[0].nutrients.length === 0){
-        alert("Item Has No Nutritional Info!")
-      }else{
-      this.setState({
-          singleFood: foodObj.report.foods[0].nutrients,
-          newObj: {
-          content: foodObj.report.foods[0].name,
-          energy: foodObj.report.foods[0].nutrients[0].value,
-          protein: foodObj.report.foods[0].nutrients[1].value,
-          sugars: foodObj.report.foods[0].nutrients[2].value,
-          fat: foodObj.report.foods[0].nutrients[3].value,
-          carbs: foodObj.report.foods[0].nutrients[4].value,
-          }
-        })
-      }
-    })
-  }
 
 
-  getCurrentDate(separator=''){
-  let newDate = new Date()
-  let date = newDate.getDate();
-  let month = newDate.getMonth() + 1;
-  let year = newDate.getFullYear();
-
-  return `${year}/${month<10?`0${month}`:`${month}`}/${date}`
-  }
-
+  // componentDidMount(){
+  //
+  //   fetch(`http://localhost:3000/users/${this.props.currentUser.id}/get_journals` )
+  //   .then(resp => resp.json())
+  //   .then(response => {
+  //     console.log(response)
+  //   })
+  // }
 
 render() {
-
-  const filteredJournals = this.props.journals.filter(entry => entry.user_id === this.props.currentUser.id)
+  console.log(this.state, "MOUNTED JOURNAL")
 
     return (
       <div style={{textAlign: 'center'}}>
@@ -115,15 +141,15 @@ render() {
           return <option value={food.ndbno}>{food.name}</option>
           }
         )}
-      </select><Button color='blue' onClick={this.getNutrients} >Check Nutrients</Button>
-    <Button color='blue' onClick={this.submitEntry }>Add To Food Journal Entry</Button>
+      </select>
+    <Button color='blue' onClick={this.journalEntry }>Add To Food Journal Entry</Button>
       <Divider horizontal>
         <Header as='h4'>
           <Icon color='blue' name='bar chart' />
           Nutritional Information
         </Header>
       </Divider>
-<div style={{textAlign: '50%'}}>
+<div style={{display: 'inline-block'}}>
     {this.state.singleFood.map(nutrient => {
       return <NutrientInfo key={nutrient} nutrient={nutrient}/>
     })}
@@ -138,7 +164,7 @@ render() {
             <Table.Body color='blue'>
               <Table color='blue'>
           {
-            filteredJournals.map(food =>{
+            this.props.journals.map(food =>{
               return <Fragment key={food.id}>
                   <Table.Row>
                     <Table.HeaderCell>Food</Table.HeaderCell>
@@ -155,7 +181,7 @@ render() {
                       <Table.Cell>{food.sugar}</Table.Cell>
                       <Table.Cell>{food.carbs}</Table.Cell>
                       <Table.Cell>{food.fat}</Table.Cell>
-              </Table.Body>
+                </Table.Body>
               <h4 color='blue'>Date Posted: {food.created_at.slice(0, -14)}</h4>
               </Fragment>
             })
@@ -170,13 +196,3 @@ render() {
 }
 
 export default Journal;
-
-// <Form onSubmit={this.submitEntry}>
-// <TextArea onChange={this.addEntry}placeholder='Type Here' />
-// <Button color={colors} onClick={this.handleEntry} >Add New Entry</Button>
-// </Form>
-
-
-// <h3>Posted at: {this.getCurrentDate()}</h3>
-
-// <Button>Edit</Button><h3>Posted at: {this.getCurrentDate()}</h3>

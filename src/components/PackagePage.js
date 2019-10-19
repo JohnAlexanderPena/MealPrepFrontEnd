@@ -4,6 +4,8 @@ class PackagePage extends React.Component{
 
 
 render(){
+  console.log("PACKAGE PAGE")
+
 
 const filteredUserPackages = this.props.packages.filter(pack => pack.id === this.props.currentUser.id)
 

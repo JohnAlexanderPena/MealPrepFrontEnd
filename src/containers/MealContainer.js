@@ -26,6 +26,8 @@ buyMeal = (event) => {
 }
 
   render() {
+    console.log("MOUTNED MEAl CONTAINER")
+
     return (
     <Fragment>
       <Button value="vegetarian" onClick={this.handleFilter}>Show Vegetarian Meals Only</Button>

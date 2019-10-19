@@ -53,7 +53,7 @@ componentDidMount() {
     }else if(result >= 25 && result < 29.9){
       return `Your BMI of ${result} shows you are above the recommended weight and we recommend the Slim Package`
     }else if(result >= 30 && result < 40){
-      return `Your BMI of ${result} shows your are above the recommended wieght and we recommend the Slim Package`
+      return `Your BMI of ${result} shows your are above the recommended weight and we recommend the Slim Package`
     }else if(result >= 40){
       return `Your BMI of ${result} shows your are severely overweight and we recommend the Slim Package`
     }else{
@@ -87,6 +87,7 @@ chooseLater = () => {
 
 render(){
 
+  console.log("BMI PAGE")
 return(
   <div>
       <div color="blue" style={{'text-align': 'center', 'color': 'rgb(41,135,205)'}}>
@@ -124,7 +125,7 @@ return(
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-            <Button onClick={this.handleClick} id="6" value="50" name="Balance"basic color='blue'>
+            <Button onClick={this.handleClick} id="6" value="50" name="Balanced"basic color='blue'>
               Choose
             </Button>6 Meals/week - $59.99
         </Card.Content>

@@ -45,9 +45,10 @@ handleChange = (event) => {
 
 
 render() {
+
   return (
 
-  <Grid textAlign='center' color="blue" verticalAlign='middle'>
+  <Grid textAlign='center' color="blue" verticalAlign='middle' style={{'margin-top': '15rem'}}>
     <Grid.Column position='centered' style={{ maxWidth: 650 }}>
       <Header as='h2' color='black' textAlign='center'>
         <Image src="https://i.imgur.com/BtZWQ9i.png"/> Log-in to your account

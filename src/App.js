@@ -5,8 +5,8 @@ import MainContainer from '../src/containers/MainContainer'
 
 class App extends Component{
 
-
   render(){
+
     return (
       <Router>
         <MainContainer />

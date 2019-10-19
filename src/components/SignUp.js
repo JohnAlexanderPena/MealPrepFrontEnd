@@ -71,6 +71,8 @@ handleChange = (event) => {
 
 
 render(){
+  console.log("SIGN UP")
+
   return (
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
