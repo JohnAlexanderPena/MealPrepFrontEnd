@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "bmi-calc": "^2.0.0",
-    "i": "^0.3.6",
+    "i": "^0.3.7",
     "local-storage": "^2.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
